@@ -8,7 +8,7 @@
 2. create a script and run [some](esercizi-mrz-3-edizione) functions .. or use the [tester](mrz-3-edition/tester.m)
 
 ## Questions and issues
-The [https://github.com/FIUP/calcolo-numerico/issues](link to issues of my project) is **only** for bug reports and feature requests. Anything else, such as questions for help, should be posted as `pull request` with detailed motivation.
+The [Github issue tracker](https://github.com/FIUP/calcolo-numerico/issues) is **only** for bug reports and feature requests. Anything else, such as questions for help, should be posted as `pull request` with detailed motivation.
 
 
 ## License
