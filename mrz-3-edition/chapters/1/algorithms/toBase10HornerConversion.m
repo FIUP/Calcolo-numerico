@@ -13,3 +13,23 @@
  % See the License for the specific language governing permissions and
  % limitations under the License.
 %}
+
+
+function [c] = toBase10HornerConversion (a, b)
+% TOBASE10HORNERCONVERSION Convert number a from base 10 to number c in base b
+%
+%  [c] = fromBase10Conversion (a, n, b)
+%
+% Input:
+% a - integer number to convert from base b; a should be an array so that
+%     each digit is an array item; a should be >= 0
+% b - base form which convert number a; b must >= 2
+%
+% Output:
+% c - number a converted from base b to base 10
+
+n = length(a);  % number of digits in a
+c = 0;
+for i = 1 : n  % loop through digits in reversed order
+    c = c + a(i) * b ^ (n - i);  % increase converter decimal number
+end

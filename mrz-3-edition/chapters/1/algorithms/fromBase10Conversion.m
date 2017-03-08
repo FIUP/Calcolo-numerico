@@ -21,7 +21,7 @@ function [c] = fromBase10Conversion (a, b)
 %  [c] = fromBase10Conversion (a, b)
 %
 % Input:
-% a - integer number to convert from base 10
+% a - integer number to convert from base 10; a should be >= 0
 % b - base to which convert number a; b must >= 2
 %
 % Output:

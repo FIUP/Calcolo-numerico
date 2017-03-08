@@ -15,6 +15,9 @@
 %}
 
 
-% some examples of usage
+% to run scripts in this repository go to Home > Environment > Set Path >
+% Add with subfolders > Select this folder
 
-fromBase10Conversion(4, 2);
+% some examples of usage
+fromBase10Conversion(4, 2);  % should return 100
+toBase10HornerConversion([15, 0, 1], 16);  % should return 3841
