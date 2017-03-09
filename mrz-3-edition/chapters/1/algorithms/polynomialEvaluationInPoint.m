@@ -15,3 +15,23 @@
 %}
 
 
+function [y] = polynomialEvaluationInPoint (a, n, x)
+% POLYNOMIALEVALUATIONINPOINT Evaluation of polynomial in given point
+%
+%  [y] = polynomialEvaluationInPoint (a, x)
+%
+% Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
+% employes Horner evaluation to evaluate it in point.
+%
+% Input:
+% a - array: a[i] is the i-th coeffient of the polynomial
+% n - degree of polynomial
+% x - point where to evaluate polynomial
+%
+% Output:
+% y - value of polynomial in point x
+
+y = a(1);
+for i = 2 : n + 1  % loop through polynomial coefficients
+    y = y * x + a(i);  % use horner evaluation
+end
