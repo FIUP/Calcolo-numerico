@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - polynomialEvaluationInPoint
+- toBase10FractionalPartHornerConversion
 
 ## 0.1 - 2017-03-08
 

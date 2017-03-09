@@ -19,6 +19,7 @@
 % Add with subfolders > Select this folder
 
 % some examples of usage
-fromBase10Conversion(4, 2);  % should return 100
-toBase10HornerConversion([15, 0, 1], 16);  % should return 3841
-polynomialEvaluationInPoint([2, 1, 0], 2, 10);  % should return 210 
+fromBase10Conversion(4, 2);  % 100
+toBase10HornerConversion([15, 0, 1], 16);  % 3841
+polynomialEvaluationInPoint([2, 1, 0], 2, 10);  % 210
+toBase10FractionalPartHornerConversion([0, 0, 1], 2)  % 0.1250

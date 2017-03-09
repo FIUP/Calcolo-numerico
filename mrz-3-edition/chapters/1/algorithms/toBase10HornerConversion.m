@@ -18,7 +18,7 @@
 function [c] = toBase10HornerConversion (a, b)
 % TOBASE10HORNERCONVERSION Convert number a from base 10 to number c in base b
 %
-%  [c] = fromBase10Conversion (a, n, b)
+% [c] = fromBase10Conversion (a, b)
 %
 % Input:
 % a - integer number to convert from base b; a should be an array so that
