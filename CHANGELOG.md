@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.1 - 2017-03-15
+
+### Added
+- fromBase10FractionalPartConversion
+
 ## 0.2 - 2017-03-09
 
 ### Added

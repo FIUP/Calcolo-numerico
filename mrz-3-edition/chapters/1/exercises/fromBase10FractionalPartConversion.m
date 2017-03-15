@@ -13,3 +13,28 @@
  % See the License for the specific language governing permissions and
  % limitations under the License.
 %}
+
+
+function [c] = fromBase10FractionalPartConversion (a, b, m)
+% FROMBASE10FRACTIONALPARTCONVERSION Convert a fractional part of a number
+%     from base 10 to number c in base b (with at most m decimal places)
+%
+% [c] = fromBase10FractionalPartConversion (a, b, m)
+%
+% Input:
+% a - fractional part of number to convert from base 10 to base b
+% b - base form which convert number a; b must >= 2
+% m - max number of precision digits in result
+%
+% Output:
+% c - fractional part of number converted from base 10 to base b
+%     (array-like)
+
+current_fractional_part = a;  % decimal part used in multplications
+c = [];  % result array-like
+for decimal_places_current_precision = 0 : m
+    current_fractional_part = current_fractional_part * b;
+    int_part = floor(current_fractional_part);
+    c = [c int_part];  % add just computed decimal digit
+    current_fractional_part = current_fractional_part - int_part;  % get only fractional part
+end
