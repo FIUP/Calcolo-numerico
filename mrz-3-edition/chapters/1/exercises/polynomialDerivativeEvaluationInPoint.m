@@ -13,3 +13,30 @@
  % See the License for the specific language governing permissions and
  % limitations under the License.
 %}
+
+function [c] = polynomialDerivativeEvaluationInPoint (p, x)
+% POLYNOMIALDERIVATIVEEVALUATIONINPOINT
+%     Compute derivative of polynomial at given point
+%
+% [c] = polynomialDerivativeEvaluationInPoint (p, x)
+%
+% Input:
+% p - array-like coefficients of polynomial
+%     e.g
+%         polynomial: x^4 + 3x + 2
+%                     x^4 + 0 * x^3 + 0*x^2 + 3*x + 2
+%         p         : 4, 0, 0, 3, 2
+% x - point where to evaluate derivative of p
+%
+% Output:
+% c - value of derivative of p in x
+
+n = length(p);  % get number of coefficients
+degree = n - 1;  % degree of the polynomial
+c = 0;  % result array-like
+for i = 1 : n - 1
+    current_degree = degree + 1 - i;  % current degree of the expansion
+    current_coefficient = p(i);  % polynomial coefficient of the expansion
+    exp_degree = degree - i;  % degree at which x is to be raised now
+    c = current_degree * current_coefficient * x ^ exp_degree + c;
+end

@@ -23,10 +23,10 @@
 %% chapter 1
 % algorithms
 fromBase10Conversion(4, 2);  % 100
-polynomialEvaluationInPoint( fromBase10FractionalPartConversion[2, 1, 0], 2, 10);  % 210
+polynomialEvaluationInPoint([2, 1, 0], 2, 10);  % 210
 toBase10HornerConversion([15, 0, 1], 16);  % 3841
 
 % exercises
-
 toBase10FractionalPartHornerConversion([0, 0, 1], 2);  % 0.1250
 fromBase10FractionalPartConversion(1/7, 4, 8);  % [0, 2, 1, 0, 2, 1, 0, 2, 1]
+polynomialDerivativeEvaluationInPoint([3, 4, 8, 2, 9], 7)  % 4818
