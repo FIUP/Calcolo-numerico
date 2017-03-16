@@ -15,21 +15,22 @@
 %}
 
 
-function [c] = toBase10FractionalPartHornerConversion (a, b)
-% FROMBASE10CONVERSION Convert number a from base 10 to number c in base b
+function [direct, horner] = hornerVSAll (a, x)
+% HORNERVSALL Evaluation of polynomial in given point with and without
+% Horner method
 %
-% [c] = toBase10FractionalPartHornerConversion (a, b)
+% [direct, horner] = hornerVSAll (a, x)
+%
+% Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
+% employes Horner evaluation to evaluate it in point.
 %
 % Input:
-% a - fractional part of number to convert from base b; a should be an
-%     array so that each digit is an array item
-% b - base form which convert number a; b must >= 2
+% a - array: a[i] is the i-th coeffient of the polynomial
+% x - point where to evaluate polynomial
 %
 % Output:
-% c - fractional part of number converted from base b to base 10
+% direct - polynomial evaluaton without Horner method
+% horner - polynomial evaluaton with Horner method
 
-n = length(a);  % length of fractional part
-c = a(n) / b;
-for i = n - 1 : -1 : 1
-    c = (c + a(i)) / b;  % Horner conversion
-end
+direct = polynomialEvaluationInPoint(a, x);  % compute the 2 values
+horner = polynomialHornerEvaluationInPoint(a, x);

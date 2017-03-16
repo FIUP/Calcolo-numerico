@@ -20,11 +20,13 @@
 
 % some examples of usage
 
+
+clear all; close all; clc;  % remove all values in memory
+
 %% chapter 1
 % algorithms
 fromBase10Conversion(4, 2);  % 100
-polynomialHornerEvaluationInPoint([2, 1, 1], 10)  % 210
-polynomialEvaluationInPoint([2, 1, 1], 10)  % 210
+polynomialHornerEvaluationInPoint([2, 1, 1], 10);  % 211
 toBase10HornerConversion([15, 0, 1], 16);  % 3841
 
 % exercises
@@ -33,7 +35,7 @@ fromBase10FractionalPartConversion(1/7, 4, 8);  % [0, 2, 1, 0, 2, 1, 0, 2, 1]
 polynomialDerivativeEvaluationInPoint([3, 4, 8, 2, 9], 7);  % 4818
 
 %% chapter 2
-% algorithmsepsEstimation
+% algorithms
 epsEstimation();  % 2.2204e-16 (Matlab R2016b in Linux 64bit)
 baseComputation();  % 1 (Matlab R2016b in Linux 64bit)
 parabolaSolver(1, 4, 1);  % -3.7321, -0.2679
@@ -46,6 +48,7 @@ squaredMultiplicationsTester(2, 3);
     % 2,2.22044604925031e-16,2.22044604925031e-16,16;
     % 3,1.11022302462516e-16,1.11022302462516e-16,16
     % ]
-% hornerVSAll
-% parabolaSolverSmartVersion
+hornerVSAll([10^18, 10 ^ 1, 10^-9], 10^23);  % 9.999999999999999e+63, 9.999999999999999e+63
+parabolaSolverSmartVersion(1, 4, 1);  % -3.7321, -0.2679
+% parabolaSolverTester(10 ^(-3), 0.8, -6 * 10 ^ (-5), -1 * 10 ^ (-5));  % like picture 2.2 in book
 % parabolaSolverRealVersion

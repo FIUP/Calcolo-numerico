@@ -15,21 +15,45 @@
 %}
 
 
-function [c] = toBase10FractionalPartHornerConversion (a, b)
-% FROMBASE10CONVERSION Convert number a from base 10 to number c in base b
+function [x1, x2] = parabolaSolverSmartVersion (a, b, c)
+% PARABOLASOLVERSMARTVERSION Solves parabola equation in a smart way
 %
-% [c] = toBase10FractionalPartHornerConversion (a, b)
+% [x1, x2] = parabolaSolverSmartVersion (a, b, c)
+%
+% Given a parabola equation like ax² + bx + c = 0
 %
 % Input:
-% a - fractional part of number to convert from base b; a should be an
-%     array so that each digit is an array item
-% b - base form which convert number a; b must >= 2
+% a - coefficient of x²
+% b - coefficient of x
+% c - known term
 %
 % Output:
-% c - fractional part of number converted from base b to base 10
+% x1 - first solution
+% x2 - second solution
 
-n = length(a);  % length of fractional part
-c = a(n) / b;
-for i = n - 1 : -1 : 1
-    c = (c + a(i)) / b;  % Horner conversion
+if a == 0
+    if b == 0
+        if c == 0
+            x1 = NaN;  % 0 + 0 + 0 = 0 ... not determined
+            x2 = NaN;
+        else
+            x1 = NaN;  % 0 + 0 + c = 0 ... impossible!
+            x2 = NaN;
+        end
+    else
+        x1 = -c / b;  % bx + c = 0 ... 1-deg equation
+        x2 = x1;
+    end
+else
+    delta = b ^ 2 - 4 * a * c;  % calculate D
+    if delta < 0
+        x1 = NaN;  % no real solutions
+        x2 = NaN;
+    elseif delta == 0
+        x1 = -b / (2 * a);  % 2 equals solutions
+        x2 = x1;
+    else
+        x1 = (-b - sign(b) * sqrt(delta)) / (2 * a);  % standard 2-deg equation
+        x2 = c / (a * x1);  % clever way to reduce numerical errors
+    end
 end
