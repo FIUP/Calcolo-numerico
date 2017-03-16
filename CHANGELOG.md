@@ -4,8 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.2.3 - 2017-03-16
 
 ### Added
-- epsEstimation
-- baseComputation
+- epsEstimation, baseComputation, parabolaSolver
 - raw II chapter algs and exercises
 
 ### Refactored

@@ -15,21 +15,45 @@
 %}
 
 
-function [c] = toBase10HornerConversion (a, b)
-% TOBASE10HORNERCONVERSION Convert number a from base 10 to number c in base b
+function [x1, x2] = parabolaSolver (a, b, c)
+% PARABOLASOLVER Solves parabola equation and returns solutions
 %
-% [c] = fromBase10Conversion (a, b)
+% [x1, x2] = parabolaSolver (a, b, c)
+%
+% Given a parabola equation like ax² + bx + c = 0
 %
 % Input:
-% a - integer number to convert from base b; a should be an array so that
-%     each digit is an array item; a should be >= 0
-% b - base form which convert number a; b must >= 2
+% a - coefficient of x²
+% b - coefficient of x
+% c - known term
 %
 % Output:
-% c - number a converted from base b to base 10
+% x1 - first solution
+% x2 - second solution
 
-n = length(a);  % number of digits in a
-c = 0;
-for i = 1 : n  % loop through digits in reversed order
-    c = c + a(i) * b ^ (n - i);  % increase converter decimal number
+if a == 0
+    if b == 0
+        if c == 0
+            x1 = NaN;  % 0 + 0 + 0 = 0 ... not determined
+            x2 = NaN;
+        else
+            x1 = NaN;  % 0 + 0 + c = 0 ... impossible!
+            x2 = NaN;
+        end
+    else
+        x1 = -c / b;  % bx + c = 0 ... 1-deg equation
+        x2 = x1;
+    end
+else
+    delta = b ^ 2 - 4 * a * c;  % calculate D
+    if delta < 0
+        x1 = NaN;  % no real solutions
+        x2 = NaN;
+    elseif delta == 0
+        x1 = -b / (2 * a);  % 2 equals solutions
+        x2 = x1;
+    else
+        x1 = (-b - sqrt(delta)) / (2 * a);  % standard 2-deg equation
+        x2 = (-b + sqrt(delta)) / (2 * a);
+    end
 end
