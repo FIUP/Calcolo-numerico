@@ -15,24 +15,15 @@
 %}
 
 
-function [c] = fromBase10Conversion (a, b)
-% FROMBASE10CONVERSION Convert number a from base 10 to number c in base b
+function [e] = epsEstimation ()
+% EPSESTIMATION Simple Cleve-Moler algorithm to evaluate machine precision
 %
-%  [c] = fromBase10Conversion (a, b)
-%
-% Input:
-% a - integer number to convert from base 10; a should be >= 0
-% b - base to which convert number a; b must >= 2
+%  [e] = epsEstimation ()
 %
 % Output:
-% c - number a converted to base b
+% e - eps (machine precision)
 
-a = abs(a);  % get absolute value
-c = [];
-while a ~= 0
-    q = floor(a / b);  % quotient
-    r = a - q * b;  % remainder
-    a = q;
-    c = [c, r];  % add new digit
-end
-c = fliplr(c);  % flip
+x = 4.0/3.0;  % 4/3
+y = x - 1.0;  % 4/3 - 1 = 1/3
+z = y + y + y;  % 1/3 + 1/3 + 1/3 = 3/3 = 1
+e = abs(z - 1.0);  % 1 - 1 = 0

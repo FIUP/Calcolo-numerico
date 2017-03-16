@@ -30,3 +30,17 @@ toBase10HornerConversion([15, 0, 1], 16);  % 3841
 toBase10FractionalPartHornerConversion([0, 0, 1], 2);  % 0.1250
 fromBase10FractionalPartConversion(1/7, 4, 8);  % [0, 2, 1, 0, 2, 1, 0, 2, 1]
 polynomialDerivativeEvaluationInPoint([3, 4, 8, 2, 9], 7);  % 4818
+
+%% chapter 2
+% algorithmsepsEstimation
+epsEstimation();  % 2.2204e-16 (Matlab R2016b in Linux 64bit)
+% baseComputation
+% parabolaSolver
+
+% exercises
+% maxMinFinder
+% longSummationSolver
+% squaredMultiplications
+% hornerVSAll
+% parabolaSolverSmartVersion
+% parabolaSolverRealVersion

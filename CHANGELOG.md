@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.3 - 2017-03-16
+
+### Added
+- epsEstimation
+- raw II chapter algs and exercises
+
+### Refactored
+- chapters
+
 ## 0.2.2 - 2017-03-15
 
 ### Added
