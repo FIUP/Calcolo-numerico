@@ -1,10 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.4 - 2017-03-16
+
+### Added
+- maxMinFinder, longSummationSolver
+
 ## 0.2.3 - 2017-03-16
 
 ### Added
-- epsEstimation, baseComputation, parabolaSolver, maxMinFinder
+- epsEstimation, baseComputation, parabolaSolver
 - raw II chapter algs and exercises
 
 ### Refactored

@@ -15,7 +15,7 @@
 %}
 
 
-function [firstGreaterThan, firstLowerThan] = minMaxFinder (aMin, aMax)
+function [firstGreaterThan, firstLowerThan] = maxMinFinder (aMin, aMax)
 % MINMAXFINDER Finds
 % - the first number greater than the min value input
 % - the first number lower than the max value input

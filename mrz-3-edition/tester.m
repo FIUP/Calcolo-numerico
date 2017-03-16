@@ -38,8 +38,8 @@ baseComputation();  % 1 (Matlab R2016b in Linux 64bit)
 parabolaSolver(1, 4, 1);  % -3.7321, -0.2679
 
 % exercises
-maxMinFinder(1.9, 2.0)  % 1.900000000000001, 1.999999999999999 (Matlab R2016b in Linux 64bit)
-% longSummationSolver
+maxMinFinder(1.9, 2.0);  % 1.900000000000001, 1.999999999999999 (Matlab R2016b in Linux 64bit)
+longSummationSolver([19 * 10^3, 0.4, 5 * 10 ^ (-2), 4.69999999]);  % 1.900514999999000e+04
 % squaredMultiplications
 % hornerVSAll
 % parabolaSolverSmartVersion

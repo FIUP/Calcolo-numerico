@@ -14,29 +14,23 @@
  % limitations under the License.
 %}
 
-function [c] = polynomialDerivativeEvaluationInPoint (p, x)
-% POLYNOMIALDERIVATIVEEVALUATIONINPOINT
-%     Compute derivative of polynomial at given point
+function [s] = longSummationSolver (a)
+% LONGSUMMATIONSOLVER Gets the sum of the doubles in the array
 %
-% [c] = polynomialDerivativeEvaluationInPoint (p, x)
+% [s] = longSummationSolver (a)
 %
 % Input:
-% p - array-like coefficients of polynomial
-%     e.g
-%         polynomial: x^4 + 3x + 2
-%                     x^4 + 0 * x^3 + 0*x^2 + 3*x + 2
-%         p         : 4, 0, 0, 3, 2
-% x - point where to evaluate derivative of p
+% a - array of doubles
 %
 % Output:
-% c - value of derivative of p in x
+% s - value of the sum of numbers in array
 
-n = length(p);  % get number of coefficients
-degree = n - 1;  % degree of the polynomial
-c = 0;  % result array-like
-for i = 1 : n - 1
-    current_degree = degree + 1 - i;  % current degree of the expansion
-    current_coefficient = p(i);  % polynomial coefficient of the expansion
-    exp_degree = degree - i;  % degree at which x is to be raised now
-    c = current_degree * current_coefficient * x ^ exp_degree + c;
+%% Idea: sort array, then sum starting from the little numbers. This way
+%  we can reduce errors due to machine precision.
+
+a = sort(a);  % sort array
+n = length(a);  % array length
+s = 0;  % sum value
+for i = 1 : n
+    s = a(i) + s;
 end
