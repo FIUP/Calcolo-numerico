@@ -15,21 +15,37 @@
 %}
 
 
-function [c] = toBase10FractionalPartHornerConversion (a, b)
-% FROMBASE10CONVERSION Convert number a from base 10 to number c in base b
+function [o] = squaredMultiplications (n)
+% SQUAREDMULTIPLICATIONS Evaluates f(n) for n. f(n) is defined to be
+% (sqrt((n) / (n - 1) * (n - 1) / (n - 2) * ... * 1 / 1)) ^ 2 *
+%  (n - 1) / (n) * (n - 2) / (n - 1) * ... * 1 / 1
 %
-% [c] = toBase10FractionalPartHornerConversion (a, b)
+% [o] = squaredMultiplications (n)
 %
 % Input:
-% a - fractional part of number to convert from base b; a should be an
-%     array so that each digit is an array item
-% b - base form which convert number a; b must >= 2
+% n - the integer to copmute the function f(n)
 %
 % Output:
-% c - fractional part of number converted from base b to base 10
+% o - f(n) computed with no smart approximations
 
-n = length(a);  % length of fractional part
-c = a(n) / b;
-for i = n - 1 : -1 : 1
-    c = (c + a(i)) / b;  % Horner conversion
+%% First part:
+% o = (Prod[i = 0 to n - 2] (n - i) / (n - i - 1) ) * (n - (n - 1)) / 1
+
+o = (n - (n - 1)) / 1.0;
+for i = 0 : n - 2
+    o = o * (n - i) / (n - i - 1);
+end
+
+%% Second part:
+% o = sqrt(o) ^ 2
+
+o = sqrt(o);
+o = o ^ 2;
+
+%% Third part:
+% o = (Prod[i = 0 to n - 2] (n - i - 1) / (n - i) ) * 1 / (n - (n - 1))
+
+o = o * 1 / (n - (n - 1));
+for i = 0 : n - 2
+    o = o * (n - i - 1) / (n - i);
 end

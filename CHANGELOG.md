@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.2.4 - 2017-03-16
 
 ### Added
-- maxMinFinder, longSummationSolver
+- maxMinFinder, longSummationSolver, squaredMultiplications and squaredMultiplicationsTester
 
 ## 0.2.3 - 2017-03-16
 
