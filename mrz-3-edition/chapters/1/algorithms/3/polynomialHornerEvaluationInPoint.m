@@ -15,10 +15,10 @@
 %}
 
 
-function [y] = polynomialEvaluationInPoint (a, x)
-% POLYNOMIALEVALUATIONINPOINT Evaluation of polynomial in given point
+function [y] = polynomialHornerEvaluationInPoint (a, x)
+% POLYNOMIALHORNEREVALUATIONINPOINT Evaluation of polynomial in given point
 %
-%  [y] = polynomialEvaluationInPoint (a, x)
+%  [y] = polynomialHornerEvaluationInPoint (a, x)
 %
 % Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
 % employes Horner evaluation to evaluate it in point.
@@ -30,8 +30,8 @@ function [y] = polynomialEvaluationInPoint (a, x)
 % Output:
 % y - value of polynomial in point x
 
-y = 0;
+y = a(1);
 n = length(a) - 1;  % degree of polynomial
-for i = 1 : n + 1  % loop through polynomial coefficients
-    y = x ^ (n + 1 - i) * a(i) + y;  % use horner evaluation
+for i = 2 : n + 1  % loop through polynomial coefficients
+    y = y * x + a(i);  % use horner evaluation
 end

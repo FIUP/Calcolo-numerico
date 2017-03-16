@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 ## 0.2.4 - 2017-03-16
 
 ### Added
-- maxMinFinder, longSummationSolver, squaredMultiplications and squaredMultiplicationsTester
+- maxMinFinder, longSummationSolver, squaredMultiplications and squaredMultiplicationsTester, polynomialEvaluationInPoint
+
+### Fixed
+- polynomialHornerEvaluationInPoint: now user can omit the polynomial degree
 
 ## 0.2.3 - 2017-03-16
 

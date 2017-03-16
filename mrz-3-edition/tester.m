@@ -23,7 +23,8 @@
 %% chapter 1
 % algorithms
 fromBase10Conversion(4, 2);  % 100
-polynomialEvaluationInPoint([2, 1, 0], 2, 10);  % 210
+polynomialHornerEvaluationInPoint([2, 1, 1], 10)  % 210
+polynomialEvaluationInPoint([2, 1, 1], 10)  % 210
 toBase10HornerConversion([15, 0, 1], 16);  % 3841
 
 % exercises
