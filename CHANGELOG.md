@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - epsEstimation
+- baseComputation
 - raw II chapter algs and exercises
 
 ### Refactored

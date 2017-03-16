@@ -15,23 +15,20 @@
 %}
 
 
-function [y] = polynomialEvaluationInPoint (a, n, x)
-% POLYNOMIALEVALUATIONINPOINT Evaluation of polynomial in given point
+function [b] = baseComputation ()
+% BASECOMPUTATION Evaluation of base used by machine
 %
-%  [y] = polynomialEvaluationInPoint (a, x)
-%
-% Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
-% employes Horner evaluation to evaluate it in point.
-%
-% Input:
-% a - array: a[i] is the i-th coeffient of the polynomial
-% n - degree of polynomial
-% x - point where to evaluate polynomial
+%  [b] = baseComputation ()
 %
 % Output:
-% y - value of polynomial in point x
+% b - base used by machine
 
-y = a(1);
-for i = 2 : n + 1  % loop through polynomial coefficients
-    y = y * x + a(i);  % use horner evaluation
+a = 1.0;
+b = 1.0;
+while ((a + 1.0) - a) == 0.0
+    a = 2.0 * a;
+end
+
+while (((a + b) - a) - b) ~= 0.0
+    b = b + 1.0;
 end
