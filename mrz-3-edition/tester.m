@@ -52,3 +52,27 @@ hornerVSAll([10^18, 10 ^ 1, 10^-9], 10^23);  % 9.999999999999999e+63, 9.99999999
 parabolaSolverSmartVersion(1, 4, 1);  % -3.7321, -0.2679
 % parabolaSolverTester(10 ^(-3), 0.8, -6 * 10 ^ (-5), -1 * 10 ^ (-5));  % like picture 2.2 in book
 parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
+
+%% chapter 3
+% algorithms
+% exercises
+
+%% chapter 4
+% algorithms
+% exercises
+
+%% chapter 5
+% algorithms
+% exercises
+
+%% chapter 6
+% algorithms
+% exercises
+
+%% chapter 7
+% algorithms
+% exercises
+
+%% chapter 8
+% algorithms
+% exercises
