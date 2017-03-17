@@ -55,7 +55,24 @@ parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
 
 %% chapter 3
 % algorithms
+% fixedPoint();
+% newton();
+% multipleRootsNewton();
+% halley();
+% convergenceEvaluation();
+% multiplicityEvaluation();
+% laguerre();
+% bairstow();
+
 % exercises
+% whyBisectLikeThis();
+% secantVSNewton();
+% newtonPlotter();
+% steffensenPlotter();
+% bisectionPlotter();
+% exercise3_6();
+% exercise3_7();
+% exercise3_8();
 
 %% chapter 4
 % algorithms
