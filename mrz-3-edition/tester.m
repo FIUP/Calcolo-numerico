@@ -56,14 +56,14 @@ parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
 fixedPoint(@sin, 0.5, 10^(-8), 100);  % 0.1627, 100
 newton(@sin, @cos, 1, 10^(-8), 100);  % 0, 5, false
 multipleRootsNewton(@(x) x.^2, @(x) 2 * x, 1, 10^(-16), 100, 1);  % 5.551115123125783e-17, 54
-[x, n] = halley(@(x) -5 * x.^4 + 6, @(x) -20 * x.^3, @(x) -60 * x.^2, 1, 10^(-16), 100);  % 1.046635139392106, 5
+halley(@(x) -5 * x.^4 + 6, @(x) -20 * x.^3, @(x) -60 * x.^2, 1, 10^(-16), 100);  % 1.046635139392106, 5
 % convergenceEvaluation();
 % multiplicityEvaluation();
 % laguerre();
 % bairstow();
 
 % exercises
-% whyBisectLikeThis();
+whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % secantVSNewton();
 % newtonPlotter();
 % steffensenPlotter();

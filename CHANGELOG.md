@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 ## 0.2.6 - 2017-03-22
 
 ### Added
-- fixedPoint, newton, multipleRootsNewton, halley
+- algs: fixedPoint, newton, multipleRootsNewton, halley
+- es: whyBisectLikeThis
 
 ### Fixed
 - newton, multipleRootsNewton names

@@ -15,20 +15,19 @@
 %}
 
 
-function [firstGreaterThan, firstLowerThan] = maxMinFinder (aMin, aMax)
-% MINMAXFINDER Finds
-% - the first number greater than the min value input
-% - the first number lower than the max value input
+function [avgGood, avgBad] = whyBisectLikeThis (a, b)
+% WHYBISECTLIKETHIS Explains why when dealing with machines, it's better to
+% compute a + (b - a) * 0.5, instead of (a + b) * 0.5
 %
-% [firstGreaterThan, firstLowerThan] = minMaxFinder (aMin, aMax)
+% [avgGood, avgBad] = whyBisectLikeThis (a, b)
 %
 % Input:
-% aMin - the min value
-% aMax - the max value
+% a - the min value
+% b - the max value
 %
 % Output:
-% firstGreaterThan - the first number greater than the min value input
-% firstLowerThan- the first number lower than the max value input
+% avgGood - average of (a + b) calculated in the best way
+% avgBad - average of (a + b) calculated in the dumb way
 
-firstGreaterThan = aMin + eps * 3;
-firstLowerThan = aMax - eps * 3;
+avgGood = a + (b - a) * 0.5;
+avgBad = (a + b) * 0.5;
