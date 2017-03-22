@@ -15,15 +15,35 @@
 %}
 
 
-function [e] = epsEstimation ()
-% EPSESTIMATION Simple Cleve-Moler algorithm to evaluate machine precision
+function [x, numberOfIterations] = halley(f, fDerivative, f2Derivative, startPoint, tolerance, maxIterations)
+% HALLEY: Finds a solution of f(x) = 0 with Halley method.
 %
-%  [e] = epsEstimation ()
+%  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, f2Derivative, startPoint, tolerance, maxIterations, r)
+%
+% Input:
+% f - 'f' function in the equation 'f(x) = 0'
+% fDerivative - derivative of f
+% f2Derivative - derivative of derivative of f
+% startPoint - starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% e - eps (machine precision)
+% x - approximation of solution of 'f(x) = 0'
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
-x = 4.0/3.0;  % 4/3
-y = x - 1.0;  % 4/3 - 1 = 1/3
-z = y + y + y;  % 1/3 + 1/3 + 1/3 = 3/3 = 1
-e = abs(z - 1.0);  % 1 - 1 = 0
+numberOfIterations = 0;
+x = startPoint;
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    fx = feval(f, x);  % evaluate f(x), f'(x), f''(x)
+    fDx = feval(fDerivative, x);
+    fDDx = feval(f2Derivative, x);
+    
+    deltaDiff = - (fx * fDx) / (fDx ^ 2 - fx * fDDx);
+    x = x + deltaDiff;
+    deltaDiff = abs(deltaDiff);
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
+end

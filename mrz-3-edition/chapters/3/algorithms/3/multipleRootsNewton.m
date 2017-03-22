@@ -16,7 +16,7 @@
 
 
 function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
-% FIXEDPOINT: Finds a solution of f(x) = 0 with Newton method.
+% MULTIPLEROOTSNEWTON: Finds a solution of f(x) = 0 with Newton method.
 %
 %  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
 %

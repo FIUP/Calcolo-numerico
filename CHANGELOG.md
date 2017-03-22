@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 ## 0.2.6 - 2017-03-22
 
 ### Added
-- fixedPoint, newton, multipleRootsNewton
+- fixedPoint, newton, multipleRootsNewton, halley
+
+### Fixed
+- newton, multipleRootsNewton names
 
 ## 0.2.5 - 2017-03-17
 

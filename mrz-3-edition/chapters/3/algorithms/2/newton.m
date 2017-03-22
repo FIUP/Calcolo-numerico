@@ -16,7 +16,7 @@
 
 
 function [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
-% FIXEDPOINT: Finds a solution of f(x) = 0 with Newton method.
+% NEWTON: Finds a solution of f(x) = 0 with Newton method.
 %
 %  [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
 %
