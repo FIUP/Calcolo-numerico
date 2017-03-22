@@ -39,10 +39,12 @@ deltaDiff = tolerance * 2;  % initialize diff
 while deltaDiff >= tolerance && numberOfIterations < maxIterations
     fx = feval(f, x);  % evaluate function in previous points
     fxOld = feval(f, xOld);
+    secantValue = (fx - fxOld) / (x - xOld);  % compute iteration
+    deltaDiff = - fx / secantValue;
     
-    secantValue = (fx - fxOld) / (x - xOld);
-    deltaDiff = - feval(f, x) / secantValue;
+    xOld = x;  % save new x values for next iteration
     x = x + deltaDiff;
     deltaDiff = abs(deltaDiff);
+    
     numberOfIterations  = numberOfIterations + 1;  % increase counter
 end

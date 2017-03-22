@@ -48,7 +48,7 @@ squaredMultiplicationsTester(2, 3);
     % ]
 hornerVSAll([10^18, 10 ^ 1, 10^-9], 10^23);  % 9.999999999999999e+63, 9.999999999999999e+63
 parabolaSolverSmartVersion(1, 4, 1);  % -3.7321, -0.2679
-% parabolaSolverTester(10 ^(-3), 0.8, -6 * 10 ^ (-5), -1 * 10 ^ (-5));  % like picture 2.2 in book
+% parabolaSolverTester(10 ^(-3), 0.8, -6 * 10 ^ (-5), -1 * 10 ^ (-5));  % image 2.2
 parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
 
 %% chapter 3
@@ -64,8 +64,8 @@ halley(@(x) -5 * x.^4 + 6, @(x) -20 * x.^3, @(x) -60 * x.^2, 1, 10^(-16), 100); 
 
 % exercises
 whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
-secant(@(x) -5 * x.^4 + 6, 1, 2, 10^(-8), 100);  % 1.046635119350855, 42
-% secantVSNewton();
+secant(@(x) -5 * x.^4 + 6, 1, 2, 10^(-8), 100);  % 1.046635139392105, 6
+% secantVSNewton(10^(-10), 10^(-10), 2 * 10^(-10), 100);  % image 3.17
 % newtonPlotter();
 % steffensenPlotter();
 % bisectionPlotter();

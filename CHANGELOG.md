@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.7 - 2017-03-22
+
+### Added
+- secantVSNewton plot and image
+
+### Fixed
+- not overwriting new x value bug in secant method
+- improved secant method by pre-allocating f(x) values
+- README link to chapters
+
 ## 0.2.6 - 2017-03-22
 
 ### Added

@@ -5,7 +5,7 @@
 
 ## Install
 1. just provide yourself with a working installation of [Matlab Mathworks](https://it.mathworks.com/products/matlab.html) or [Gnu/Octave](https://www.gnu.org/software/octave/)
-2. create a script and run [some](esercizi-mrz-3-edizione) functions .. or use the [tester](mrz-3-edition/tester.m)
+2. create a script and run [some](esercizi-mrz-3-edition) functions .. or use the [tester](mrz-3-edition/tester.m)
 
 ## Questions and issues
 The [Github issue tracker](https://github.com/FIUP/calcolo-numerico/issues) is **only** for bug reports and feature requests. Anything else, such as questions for help, should be posted as `pull request` with detailed motivation.
