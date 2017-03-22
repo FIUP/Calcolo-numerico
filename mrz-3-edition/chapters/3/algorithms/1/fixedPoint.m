@@ -15,15 +15,30 @@
 %}
 
 
-function [e] = epsEstimation ()
-% EPSESTIMATION Simple Cleve-Moler algorithm to evaluate machine precision
+function [x, numberOfIterations] = fixedPoint(f, startPoint, tolerance, maxIterations)
+% FIXEDPOINT: Finds a solution of x = f(x) with the classic fixed-point
+% method.
 %
-%  [e] = epsEstimation ()
+%  [x] = fixedPoint(f, startPoint, tolerance, maxIterations)
+%
+% Input:
+% f - 'f' function in the equation 'x = f(x)'
+% startPoint - starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - xn| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% e - eps (machine precision)
+% x - approximation of solution of 'f(x) = x'
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
-x = 4.0/3.0;  % 4/3
-y = x - 1.0;  % 4/3 - 1 = 1/3
-z = y + y + y;  % 1/3 + 1/3 + 1/3 = 3/3 = 1
-e = abs(z - 1.0);  % 1 - 1 = 0
+numberOfIterations = 0;
+x = startPoint;
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
+    xOld = x;
+    x = feval(f, x);  % evaluate function in x
+    deltaDiff = abs(x - xOld);  % update diff
+end

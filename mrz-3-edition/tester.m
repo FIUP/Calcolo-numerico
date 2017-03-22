@@ -15,12 +15,10 @@
 %}
 
 
-% to run scripts in this repository go to Home > Environment > Set Path >
+% To run scripts in this repository go to Home > Environment > Set Path >
 % Add with subfolders > Select this folder
 
-% some examples of usage
-
-
+%% some examples of usage
 clear all; close all; clc;  % remove all values in memory
 
 %% chapter 1
@@ -55,7 +53,7 @@ parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
 
 %% chapter 3
 % algorithms
-% fixedPoint();
+fixedPoint(@sin, 0.5, 10^(-8), 100);  % 0.1627, 100
 % newton();
 % multipleRootsNewton();
 % halley();
