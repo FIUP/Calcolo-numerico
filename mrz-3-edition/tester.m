@@ -54,8 +54,8 @@ parabolaSolverComplexVersion(9, 1, 1);  % -0.0556 - 0.3287i, -0.0556 + 0.3287i
 %% chapter 3
 % algorithms
 fixedPoint(@sin, 0.5, 10^(-8), 100);  % 0.1627, 100
-[x, n, f] = newton(@sin, @cos, 1, 10^(-8), 100);  % 0, 5, false
-% multipleRootsNewton();
+newton(@sin, @cos, 1, 10^(-8), 100);  % 0, 5, false
+multipleRootsNewton(@(x) x.^2, @(x) 2 * x, 1, 10^(-16), 100, 1);  % 5.551115123125783e-17, 54
 % halley();
 % convergenceEvaluation();
 % multiplicityEvaluation();

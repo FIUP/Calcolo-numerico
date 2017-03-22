@@ -15,45 +15,31 @@
 %}
 
 
-function [x1, x2] = parabolaSolver (a, b, c)
-% PARABOLASOLVER Solves parabola equation and returns solutions
+function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
+% FIXEDPOINT: Finds a solution of f(x) = 0 with Newton method.
 %
-% [x1, x2] = parabolaSolver (a, b, c)
-%
-% Given a parabola equation like ax² + bx + c = 0
+%  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
 %
 % Input:
-% a - coefficient of x²
-% b - coefficient of x
-% c - known term
+% f - 'f' function in the equation 'f(x) = 0'
+% fDerivative - derivative of f
+% startPoint - starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
+% r - multiplicity of the solution
 %
 % Output:
-% x1 - first solution
-% x2 - second solution
+% x - approximation of solution of 'f(x) = 0'
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
-if a == 0
-    if b == 0
-        if c == 0
-            x1 = NaN;  % 0 + 0 + 0 = 0 ... not determined
-            x2 = NaN;
-        else
-            x1 = NaN;  % 0 + 0 + c = 0 ... impossible!
-            x2 = NaN;
-        end
-    else
-        x1 = -c / b;  % bx + c = 0 ... 1-deg equation
-        x2 = x1;
-    end
-else
-    delta = b ^ 2 - 4 * a * c;  % calculate D
-    if delta < 0
-        x1 = NaN;  % no real solutions
-        x2 = NaN;
-    elseif delta == 0
-        x1 = -b / (2 * a);  % 2 equals solutions
-        x2 = x1;
-    else
-        x1 = (-b - sqrt(delta)) / (2 * a);  % standard 2-deg equation
-        x2 = (-b + sqrt(delta)) / (2 * a);
-    end
+numberOfIterations = 0;
+x = startPoint;
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
+    x = x + deltaDiff;
+    deltaDiff = abs(deltaDiff);
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end
