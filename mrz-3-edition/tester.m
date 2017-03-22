@@ -64,6 +64,7 @@ halley(@(x) -5 * x.^4 + 6, @(x) -20 * x.^3, @(x) -60 * x.^2, 1, 10^(-16), 100); 
 
 % exercises
 whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
+secant(@(x) -5 * x.^4 + 6, 1, 2, 10^(-8), 100);  % 1.046635119350855, 42
 % secantVSNewton();
 % newtonPlotter();
 % steffensenPlotter();

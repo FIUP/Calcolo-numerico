@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - algs: fixedPoint, newton, multipleRootsNewton, halley
-- es: whyBisectLikeThis
+- es: whyBisectLikeThis, secant
 
 ### Fixed
 - newton, multipleRootsNewton names

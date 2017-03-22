@@ -14,23 +14,35 @@
  % limitations under the License.
 %}
 
-function [s] = longSummationSolver (a)
-% LONGSUMMATIONSOLVER Gets the sum of the doubles in the array
+function [x, numberOfIterations] = secant(f, startPoint0, startPoint1, tolerance, maxIterations)
+% NEWTON: Finds a solution of f(x) = 0 with the secant method.
 %
-% [s] = longSummationSolver (a)
+%  [x, numberOfIterations, derivativeZero] = secant(f, startPoint, tolerance, maxIterations)
 %
 % Input:
-% a - array of doubles
+% f - 'f' function in the equation 'f(x) = 0'
+% startPoint0 - first starting point of method
+% startPoint1 - second starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% s - value of the sum of numbers in array
+% x - approximation of solution of 'f(x) = 0'
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
-%% Idea: sort array, then sum starting from the little numbers. This way
-%  we can reduce errors due to machine precision.
-
-a = sort(a);  % sort array
-n = length(a);  % array length
-s = 0;  % sum value
-for i = 1 : n
-    s = a(i) + s;
+numberOfIterations = 0;
+x = startPoint0;
+xOld = startPoint1;
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    fx = feval(f, x);  % evaluate function in previous points
+    fxOld = feval(f, xOld);
+    
+    secantValue = (fx - fxOld) / (x - xOld);
+    deltaDiff = - feval(f, x) / secantValue;
+    x = x + deltaDiff;
+    deltaDiff = abs(deltaDiff);
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end
