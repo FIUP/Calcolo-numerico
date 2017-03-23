@@ -15,20 +15,57 @@
 %}
 
 
-function [b] = baseComputation ()
-% BASECOMPUTATION Evaluation of base used by machine
+function [x, p, c, numberOfIterations] = convergenceEvaluation (tolerance, maxIterations)
+% CONVERGENCEEVALUATION Finds the convergence order of a sample method (in
+% this case the secant method). Moreover it returns the error reduction
+% factor.
+% More in detail, we use a sample function (i.e f(x) = a - 1/x, find a
+% solution of the equation f(x) = 0, and meanwhile we compute the
+% convergence order and error reduction factor.
 %
-%  [b] = baseComputation ()
+%  [x, p, c, numberOfIterations] = convergenceEvaluation (tolerance, maxIterations)
+%
+% Input:
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% b - base used by machine
+% x - solution of the equation
+% p - convergence order
+% c - error reduction factor
+% numberOfIterations - number of iterations executed before getting a solution
 
-a = 1.0;
-b = 1.0;
-while ((a + 1.0) - a) == 0.0
-    a = 2.0 * a;
-end
-
-while (((a + b) - a) - b) ~= 0.0
-    b = b + 1.0;
+numberOfIterations = 0;
+deltaDiff = tolerance * 2;  % initialize diff
+a = 10^(-10);  % value of a in the equation f(x) = a - 1/x
+xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
+xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
+xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
+xN = a;  % x_n, i.e the current value of solution, the starting point
+p = -1;  % null values
+c = -1;
+lastP = -1;  % null values
+lastC = -1;
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    numberOfIterations = numberOfIterations + 1;  % increase counter
+    
+    %% Compute secant method iteration
+    x = xN * (2 - a * xN);
+    deltaDiff = abs(x - xN);
+    
+    %% Update previous values
+    xN3 = xN2;
+    xN2 = xN1;
+    xN1 = xN;
+    xN = x;
+    
+    %% Compute convergence order
+    if deltaDiff < tolerance || numberOfIterations >= maxIterations % last iteration -> calculate p, c
+        p = lastP;
+        c = lastC;
+    else
+        lastP = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
+        lastC = (abs(xN - xN1) / abs(xN1 - xN2)) ^ p;
+    end
 end

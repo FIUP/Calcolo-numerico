@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## 0.2.8 - 2017-03-23
 
+### Added
+- convergenceEvaluation
+
 ### Fixed
 - halley method iteration due to book error
 
