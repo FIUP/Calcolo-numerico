@@ -42,7 +42,7 @@ while deltaDiff >= tolerance && numberOfIterations < maxIterations
     fDx = feval(fDerivative, x);
     fDDx = feval(f2Derivative, x);
     
-    deltaDiff = - (fx * fDx) / (fDx ^ 2 - fx * fDDx);
+    deltaDiff = - 2 * (fx * fDx) / (2 * (fDx ^ 2) - fx * fDDx);
     x = x + deltaDiff;
     deltaDiff = abs(deltaDiff);
     numberOfIterations  = numberOfIterations + 1;  % increase counter
