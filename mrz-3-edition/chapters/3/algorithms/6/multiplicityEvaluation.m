@@ -1,18 +1,25 @@
-function [x1, x2] = multiplicityEvaluation (a, b, c)
-% PARABOLASOLVER Solves parabola equation and returns solutions
+function [x, C, multiplicity, numberOfIterations] = multiplicityEvaluation(f, fDerivative, startPoint, tolerance, maxIterations)
+% MULTIPLICITYEVALUATION Evaluates the multiplicity of the solution with
+% the Newton method.
 %
 % [x1, x2] = parabolaSolver (a, b, c)
 %
 % Given a parabola equation like ax² + bx + c = 0
 %
 % Input:
-% a - coefficient of x²
-% b - coefficient of x
-% c - known term
+% f - 'f' function in the equation 'f(x) = 0'
+% fDerivative - derivative of f
+% startPoint - starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% x1 - first solution
-% x2 - second solution
+% x - the solution of the equation f(x) = 0
+% C - error asyntotic constant
+% multiplicity - multiplicity of the solution
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -28,29 +35,28 @@ function [x1, x2] = multiplicityEvaluation (a, b, c)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-if a == 0
-    if b == 0
-        if c == 0
-            x1 = NaN;  % 0 + 0 + 0 = 0 ... not determined
-            x2 = NaN;
-        else
-            x1 = NaN;  % 0 + 0 + c = 0 ... impossible!
-            x2 = NaN;
-        end
+C = 0;
+multiplicity = 0;
+numberOfIterations = 0;
+derivativeZero = false;
+x = startPoint;
+xN1 = x * 2;  % x_{n-1}
+xN2 = x * 3;  % x_{n-2}
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
+    derivativeValue = feval(fDerivative, x);
+    if derivativeValue == 0
+        derivativeZero = true;
     else
-        x1 = -c / b;  % bx + c = 0 ... 1-deg equation
-        x2 = x1;
+        deltaDiff = - feval(f, x) / derivativeValue;
+        xN2 = xN1;  % get next term of sequence
+        xN1 = x;
+        x = x + deltaDiff;
+        deltaDiff = abs(deltaDiff);
     end
-else
-    delta = b ^ 2 - 4 * a * c;  % calculate D
-    if delta < 0
-        x1 = NaN;  % no real solutions
-        x2 = NaN;
-    elseif delta == 0
-        x1 = -b / (2 * a);  % 2 equals solutions
-        x2 = x1;
-    else
-        x1 = (-b - sqrt(delta)) / (2 * a);  % standard 2-deg equation
-        x2 = (-b + sqrt(delta)) / (2 * a);
-    end
+    
+    C = abs(x - xN1) / abs(xN1 - xN2);
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end
+
+multiplicity = 1 / (1 - C);

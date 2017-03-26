@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.2.9 - 2017-03-26
 
 ### Added
-- help and docs on functions
+- help and docs on functions, multiplicityEvaluation
 
 ## 0.2.8 - 2017-03-23
 

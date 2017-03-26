@@ -44,6 +44,6 @@ while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativ
         deltaDiff = - feval(f, x) / derivativeValue;
         x = x + deltaDiff;
         deltaDiff = abs(deltaDiff);
-        numberOfIterations  = numberOfIterations + 1;  % increase counter
     end
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end

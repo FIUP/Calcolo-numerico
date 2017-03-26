@@ -35,8 +35,11 @@ numberOfIterations = 0;
 x = startPoint;
 deltaDiff = tolerance * 2;  % initialize diff
 while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
-    x = x + deltaDiff;
-    deltaDiff = abs(deltaDiff);
+    derivativeValue = feval(fDerivative, x);
+    if derivativeValue ~= 0
+        deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
+        x = x + deltaDiff;
+        deltaDiff = abs(deltaDiff);
+    end
     numberOfIterations  = numberOfIterations + 1;  % increase counter
 end
