@@ -1,19 +1,3 @@
-%{
- % Copyright 2017 Stefano Fogarollo
- %
- % Licensed under the Apache License, Version 2.0 (the "License");
- % you may not use this file except in compliance with the License.
- % You may obtain a copy of the License at
- %
- % http://www.apache.org/licenses/LICENSE-2.0
- %
- % Unless required by applicable law or agreed to in writing, software
- % distributed under the License is distributed on an "AS IS" BASIS,
- % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- % See the License for the specific language governing permissions and
- % limitaREADME link to chapterstions under the License.
-%}
-
 function secantVSNewton (a, startPoint0, startPoint1, maxIterations)
 % SECANTVSNEWTON Compares the secant method and the Newton one to solve an
 % equation in the form f(x) = 0. In this particular case f(x) = a - 1/x,
@@ -29,6 +13,20 @@ function secantVSNewton (a, startPoint0, startPoint1, maxIterations)
 %
 % Output:
 % void - show plot with the 2 methods iterations comparison
+
+% Copyright 2017 Stefano Fogarollo
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+% http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
 
 xSecant = startPoint0;  % x value for secant method
 xOldSecant = startPoint1;  % x old value for secant method
