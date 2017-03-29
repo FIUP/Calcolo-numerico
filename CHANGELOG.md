@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3 - 2017-03-29
+
+### Added
+- aitken (coding with plaster, sorry for mi-spellings)
+
 ## 0.2.9 - 2017-03-26
 
 ### Added

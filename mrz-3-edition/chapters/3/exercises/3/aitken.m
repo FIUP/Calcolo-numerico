@@ -1,15 +1,13 @@
-function [o] = aitken (n)
-% SQUAREDMULTIPLICATIONS Evaluates f(n) for n. f(n) is defined to be
-% (sqrt((n) / (n - 1) * (n - 1) / (n - 2) * ... * 1 / 1)) ^ 2 *
-%  (n - 1) / (n) * (n - 2) / (n - 1) * ... * 1 / 1
+function [y] = aitken (x)
+% AITKEN accelerates convergence of sequence of x_i.
 %
-% [o] = squaredMultiplications (n)
+% [y] = aitken (x)
 %
 % Input:
-% n - the integer to copmute the function f(n)
+% x - array of x_i converging to a
 %
 % Output:
-% o - f(n) computed with no smart approximations
+% y - ultimate value
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -25,24 +23,8 @@ function [o] = aitken (n)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-%% First part:
-% o = (Prod[i = 0 to n - 2] (n - i) / (n - i - 1) ) * (n - (n - 1)) / 1
-
-o = (n - (n - 1)) / 1.0;
-for i = 0 : n - 2
-    o = o * (n - i) / (n - i - 1);
+yValues = zeros(length(x) - 2);
+for n = 1 : length(x) - 2
+    yValues(n) = x(n) - (x(n + 1) - x(n))^2 / (x(n + 2) - 2 * x(n + 1) + x(n));
 end
-
-%% Second part:
-% o = sqrt(o) ^ 2
-
-o = sqrt(o);
-o = o ^ 2;
-
-%% Third part:
-% o = (Prod[i = 0 to n - 2] (n - i - 1) / (n - i) ) * 1 / (n - (n - 1))
-
-o = o * 1 / (n - (n - 1));
-for i = 0 : n - 2
-    o = o * (n - i - 1) / (n - i);
-end
+y = yValues(length(yValues));  % return last value
