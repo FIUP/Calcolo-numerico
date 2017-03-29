@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.3 - 2017-03-29
 
 ### Added
-- aitken (coding with plaster, sorry for mi-spellings), newtonPlotter with image, steffensenPlotter with image
+- aitken (coding with plaster, sorry for mi-spellings), newtonPlotter with image, steffensenPlotter with image, bisectionVSAnomymous with image
 - `utils` module
 
 ## 0.2.9 - 2017-03-26
