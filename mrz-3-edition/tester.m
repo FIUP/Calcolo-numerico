@@ -62,7 +62,7 @@ multiplicityEvaluation(@(x) x.^2, @(x) 2 * x, 1, 10^(-16), 100);  % 5.5511151231
 whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % secantVSNewton(10^(-10), 10^(-10), 2 * 10^(-10), 100);  % image 3.17
 % newtonPlotter(2);  % image 3.20
-% steffensenPlotter();
+% steffensenPlotter(1);  % exercise 3.4
 % bisectionPlotter();
 % exercise3_6();
 % exercise3_7();

@@ -1,19 +1,19 @@
-function [direct, horner] = steffensen (a, x)
-% HORNERVSALL Evaluation of polynomial in given point with and without
-% Horner method
+function [x, numberOfIterations] = steffensen (f, startPoint, tolerance, maxIterations)
+% STEFFENSEN Calculates solution of f(x) = x using Steffensen method.
 %
-% [direct, horner] = hornerVSAll (a, x)
-%
-% Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
-% employes Horner evaluation to evaluate it in point.
+% [x, numberOfIterations] = steffensen (f, startPoint, tolerance, maxIterations)
 %
 % Input:
-% a - array: a[i] is the i-th coeffient of the polynomial
-% x - point where to evaluate polynomial
+% f - 'f' function in the equation 'f(x) = x'
+% startPoint - starting point of method
+% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
+%             epsilon)
+% maxIterations - max number of iterations to execute
 %
 % Output:
-% direct - polynomial evaluaton without Horner method
-% horner - polynomial evaluaton with Horner method
+% x - approximation of solution of 'f(x) = 0'
+% numberOfIterations - number of iterations executed before getting
+%                      solution
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -29,5 +29,15 @@ function [direct, horner] = steffensen (a, x)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-direct = polynomialEvaluationInPoint(a, x);  % compute the 2 values
-horner = polynomialHornerEvaluationInPoint(a, x);
+numberOfIterations = 0;
+x = startPoint;
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    u0 = x;  % build aitken list
+    u1 = feval(f, u0);
+    u2 = feval(f, u1);
+    xNew = aitken([u0 u1 u2]);
+    deltaDiff = abs(x - xNew);
+    x = xNew;
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
+end

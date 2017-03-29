@@ -1,6 +1,8 @@
 function newtonPlotter (startPoint)
 % NEWTONPLOTTER Plots convergence of various Newton methods for a sample
 % equation f(x) = (x - 1)^2 = 0
+%
+% newtonPlotter (startPoint)
 % 
 % Input:
 % startPoint - initial point where to start Newton methods
@@ -72,14 +74,12 @@ figure  % initalize plot
 %% Iterations
 plot(linspacearray(simpleNetwonIterations), simpleNetwonIterations, '-');  % plot simple Newton method iterations
 hold on  % wait before showing plot
-
 plot(linspacearray(mulNetwonIterations), mulNetwonIterations, '--');  % plot multiple roots Newton method
 hold on  % wait before showing plot
 
 %% Digits
 plot(linspacearray(simpleNetwonDigits), simpleNetwonDigits, 'x');  % plot simple Newton method iterations
 hold on  % wait before showing plot
-
 plot(linspacearray(mulNetwonDigits), mulNetwonDigits, '*');  % plot multiple roots Newton method
 hold on  % wait before showing plot
 

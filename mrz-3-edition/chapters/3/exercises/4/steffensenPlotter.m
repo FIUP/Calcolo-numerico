@@ -1,19 +1,11 @@
-function [direct, horner] = steffensenPlotter (a, x)
-% HORNERVSALL Evaluation of polynomial in given point with and without
-% Horner method
+function steffensenPlotter (startPoint)
+% STEFFENSENPLOTTER Plots iterations of Steffensen methods for a given
+% equation.
 %
-% [direct, horner] = hornerVSAll (a, x)
-%
-% Given the polynomial written as a0 * x^n + a1 * x^(n-1) + ... + an,
-% employes Horner evaluation to evaluate it in point.
+% steffensenPlotter (startPoint)
 %
 % Input:
-% a - array: a[i] is the i-th coeffient of the polynomial
-% x - point where to evaluate polynomial
-%
-% Output:
-% direct - polynomial evaluaton without Horner method
-% horner - polynomial evaluaton with Horner method
+% startPoint - starting point of method
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -29,5 +21,40 @@ function [direct, horner] = steffensenPlotter (a, x)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-direct = polynomialEvaluationInPoint(a, x);  % compute the 2 values
-horner = polynomialHornerEvaluationInPoint(a, x);
+%% Input settings
+f = @(x) 4 / x;
+correctSolution = 2;
+tolerance = 10 ^ (-8);
+maxIterations = 100;
+
+%% Steffensen method
+numberOfIterations = 0;
+x = startPoint;
+iterations = [x];  % list that will contain iteration values
+deltaDiff = tolerance * 2;  % initialize diff
+while deltaDiff >= tolerance && numberOfIterations < maxIterations
+    u0 = x;  % build aitken list
+    u1 = feval(f, u0);
+    u2 = feval(f, u1);
+    xNew = aitken([u0 u1 u2]);
+    deltaDiff = abs(x - xNew);
+    x = xNew;
+    iterations = [iterations x];
+    numberOfIterations  = numberOfIterations + 1;  % increase counter
+end
+
+correctDigits = numberOfCorrectDigits(iterations, correctSolution);  % compute number of correct digit per iteration
+
+%% Plot results
+figure  % initalize plot
+plot(linspacearray(iterations), iterations, '-');  % plot iterations
+hold on  % wait before showing plot
+
+plot(linspacearray(correctDigits), correctDigits, '--');  % plot digits
+hold on  % wait before showing plot
+
+xlabel('iterations');  % add axis labels to plot
+ylabel('solution approximation and number of correct digits');
+title('Steffensen method to solve f(x) = 4 / x = x');  % add title
+legend('Steffensen method', 'number of correct digits');  % add legend
+hold off  % release lock and show plot
