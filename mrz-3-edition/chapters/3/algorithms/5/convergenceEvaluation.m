@@ -58,7 +58,7 @@ while deltaDiff >= tolerance && numberOfIterations < maxIterations
     xN = x;
     
     %% Compute convergence order
-    if deltaDiff < tolerance || numberOfIterations >= maxIterations % last iteration -> calculate p, c
+    if numberOfIterations == maxIterations % last iteration -> calculate p, c
         p = lastP;
         c = lastC;
     else

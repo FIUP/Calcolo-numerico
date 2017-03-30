@@ -65,8 +65,8 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % steffensenPlotter(1);  % exercise 3.4
 % bisectionVSAnomymous(1.5);  % exercise 3.5
 % exercise3_6();  % exercise 3.6
-% exercise3_7();
-% exercise3_8();
+% exercise3_7();  % exercise 3.7
+% exercise3_8();  % TODO
 
 %% chapter 4
 % algorithms

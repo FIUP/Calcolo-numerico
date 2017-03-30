@@ -2,6 +2,9 @@ function exercise3_6 ()
 % EXERCISE3_6 Solves exercse 3.6 of book.
 %
 % exercise3_6 ()
+%
+% Use Newton method to solve f(x) = 0. Then use a different pt-fixed method
+% and plot the comparison.
 
 % Copyright 2017 Stefano Fogarollo
 %
