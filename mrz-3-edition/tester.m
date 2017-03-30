@@ -64,7 +64,7 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % newtonPlotter(2);  % image 3.20
 % steffensenPlotter(1);  % exercise 3.4
 % bisectionVSAnomymous(1.5);  % exercise 3.5
-% exercise3_6();
+% exercise3_6();  % exercise 3.6
 % exercise3_7();
 % exercise3_8();
 

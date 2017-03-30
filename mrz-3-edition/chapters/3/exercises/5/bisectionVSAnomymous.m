@@ -82,9 +82,9 @@ plot(linspacearray(iterations), iterations, '--');  % plot iterations
 hold on  % wait before showing plot
 
 %% Digits
-plot(linspacearray(correctBisectionDigits), correctBisectionDigits, '--');  % plot digits
+plot(linspacearray(correctBisectionDigits), correctBisectionDigits, 'x');  % plot digits
 hold on  % wait before showing plot
-plot(linspacearray(correctDigits), correctDigits, '--');  % plot digits
+plot(linspacearray(correctDigits), correctDigits, '*');  % plot digits
 hold on  % wait before showing plot
 
 xlabel('iterations');  % add axis labels to plot
