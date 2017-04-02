@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.2 - 2017-04-02
+
+### Added
+- lagrange interpolation
+
 ## 0.3.1 - 2017-03-30
 
 ### Added

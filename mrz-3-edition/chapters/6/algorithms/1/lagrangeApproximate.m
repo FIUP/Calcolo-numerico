@@ -1,20 +1,16 @@
-function [x, numberOfIterations] = fixedPoint(f, startPoint, tolerance, maxIterations)
-% FIXEDPOINT: Finds a solution of x = f(x) with the classic fixed-point
-% method.
+function [yVal] = lagrangeApproximate(x, y, xVal)
+% LAGRAMGEAPPROXIMATE given vectors x, y finds approximation of yVal using
+% Lagrange method.
 %
-%  [x] = fixedPoint(f, startPoint, tolerance, maxIterations)
+%  [yApproximation] = lagrangeApproximate(x, y, xVal)
 %
 % Input:
-% f - 'f' function in the equation 'x = f(x)'
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - xn| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
+% x - vector of x point where function is known
+% y - f(x)
+% xVal - x - vector of x point where function is to approximate
 %
 % Output:
-% x - approximation of solution of 'f(x) = x'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
+% yVal - approximation of f(xVal)
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -30,12 +26,31 @@ function [x, numberOfIterations] = fixedPoint(f, startPoint, tolerance, maxItera
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
-    xOld = x;
-    x = feval(f, x);  % evaluate function in x
-    deltaDiff = abs(x - xOld);  % update diff
+n = length(x);  % 1 + degree of resulting polynomial
+m = length(xVal);  % points to evaluate - 1
+yVal = [];  % resulting y values
+for k = 1 : m
+    characteristicPolynomials = [];  % list of all characteristic polynomial
+    
+    %% compute characteristic polynomial
+    for i = 1 : n
+        li = 1;  % evaluate prods for all j != i
+        for j = 1 : i - 1
+            li = li * (xVal(k) - x(j)) / (x(i) - x(j));
+        end
+        % skip j = i
+        for j = i + 1 : n
+            li = li * (xVal(k) - x(j)) / (x(i) - x(j));
+        end
+        
+        characteristicPolynomials = [characteristicPolynomials li];
+    end
+    
+    %% compute k-th yVal approx
+    yk = 0;
+    for i = 1 : n
+        yk = yk + y(i) * characteristicPolynomials(i);
+    end
+    
+    yVal = [yVal yk];
 end
