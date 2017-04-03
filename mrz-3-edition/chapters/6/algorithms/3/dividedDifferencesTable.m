@@ -1,21 +1,16 @@
-function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
-% MULTIPLEROOTSNEWTON: Finds a solution of f(x) = 0 with Newton method.
+function [t] = dividedDifferencesTable(x, y)
+% DIVIDEDDIFFERENCESTABLE: Calculates divided differences table of nodes.
 %
-%  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
+%  [t] = dividedDifferencesTable(x, y)
 %
 % Input:
-% f - 'f' function in the equation 'f(x) = 0'
-% fDerivative - derivative of f
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
-% r - multiplicity of the solution
+% x - vector of x point where function is known
+% y - f(x)
 %
 % Output:
-% x - approximation of solution of 'f(x) = 0'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
+% t - divided differences table of nodes. Each row contains the differences
+%     such that t(i, j) is t-he j-th difference starting from the i-th
+%     value.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -31,15 +26,17 @@ function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoin
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue ~= 0
-        deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
+n = length(x);  % nodes count
+t = zeros(n, n);  % zero all values
+
+for row = 1 : n
+    t(row, 1) = y(row);  % first difference is the value f(x)
+end
+
+for column = 2 : n
+    for row = 1 : n - column + 1
+        diffRows = t(row, column - 1) - t(row + 1, column - 1);
+        diffXs = x(row) - x(row + column - 1);
+        t(row, column) = diffRows / diffXs;  % dp
     end
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end

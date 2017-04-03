@@ -77,12 +77,12 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % exercises
 
 %% chapter 6
-% algorithms TODO all
-lagrangeApproximate([2.92, 3.75, -5.2], [8.24, 16.32, 2.41], [1.01, 1.54, -4.24]);  % [-5.0812 -2.1216 -3.8258]
-% nevilleAitkenApproxiate();
-% dividedDifferencesTable();
-% chebyshevPolynomia();
-% chebyshevPolynomiaZeros();
+% algorithms
+% lagrangeApproximate([2.92 3.75 -5.2], [8.24 16.32 2.41], [1.01 1.54 -4.24]);  % [-5.0812 -2.1216 -3.8258]
+% nevilleAitkenApproxiate();  % TODO
+% dividedDifferencesTable([3 1 5 6], [1 -3 2 4]);  % [1.0000 2.0000 -0.3750 0.1750; -3.0000 1.2500 0.1500 0; 2.0000 2.0000 0 0; 4.0000 0 0 0]
+% chebyshevPolynomia();  % TODO
+% chebyshevPolynomiaZeros();  % TODO
 
 % exercises TODO all
 % exercise6_1();  % exercise 6.1
