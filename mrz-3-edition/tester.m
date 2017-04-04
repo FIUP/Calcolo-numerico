@@ -84,17 +84,17 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % chebyshevPolynomia();  % TODO
 % chebyshevPolynomiaZeros();  % TODO
 
-% exercises TODO all
+% exercises
 % exercise6_1();  % exercise 6.1
-% exercise6_2();  % exercise 6.2
-% exercise6_3();  % exercise 6.3
-% exercise6_4();  % exercise 6.4
+% exercise6_2();  % TODO % exercise 6.2
+% exercise6_3();  % TODO % exercise 6.3
+% exercise6_4();  % TODO % exercise 6.4
 % exercise6_5();  % exercise 6.5
-% exercise6_6();  % exercise 6.6
-% exercise6_7();  % exercise 6.7
-% exercise6_8();  % exercise 6.8
-% exercise6_9();  % exercise 6.9
-% exercise6_10();  % exercise 6.10
+% exercise6_6();  % TODO % exercise 6.6
+% exercise6_7();  % TODO % exercise 6.7
+% exercise6_8();  % TODO % exercise 6.8
+% exercise6_9();  % TODO % exercise 6.9
+% exercise6_10();  % TODO % exercise 6.10
 
 %% chapter 7
 % algorithms

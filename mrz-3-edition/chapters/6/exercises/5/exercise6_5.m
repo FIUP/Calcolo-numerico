@@ -1,11 +1,11 @@
-function bisectionVSAnomymous (startPoint)
-% BISECTIONVSANONYMOUS Plots iterations of the bisection method VS a given
-% fixed point method.
+function exercise6_5 ()
+% EXERCISE6_5 Solves exercise 6.5 of book. Given f(x) in [2 .. 5],
+% approximate the function with Newton interpolation.  
 %
-% bisectionVSAnomymous (startPoint)
+% exercise6_5 ()
 %
-% Input:
-% startPoint - starting point of method
+% Output:
+% void - plots chart with error values.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -21,74 +21,41 @@ function bisectionVSAnomymous (startPoint)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-%% Input settings
-f = @(x) x.^4-8 * x.^ 3 + 24 * x.^2 - 33 * x + 18;
-correctSolution = 2;
-tolerance = 10 ^ (-8);
-maxIterations = 100;
+f = @(x) exp(2 * x) ./ x .^ 3;  % function
+intervalStart = 2;  % interval
+intervalEnd = 5;
+trainPointsCount = 6;  % how much points to sample
+xTrain = linspace(intervalStart, intervalEnd, trainPointsCount);  % sample points
+yTrain = f(xTrain);
+testPointsCount = 51;
+xTest = linspace(intervalStart, intervalEnd, testPointsCount);  % points to approximate
+yTest = newtonApproximate(xTrain, yTrain, xTest);  % approximate
 
-%% Bisection method
-numberOfIterations = 0;
-lX = 1;
-rX = 2.7;
-bisectionIterations = [];  % list that will contain iteration values
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    rExt = feval(f, rX);  % compute 
-    lExt = feval(f, lX);
-    x = lX + (rX - lX) * 0.5;
-    fX = feval(f, x);
-    
-    if lExt * rExt < 0
-        rX = x;
-    elseif lExt * rExt > 0
-        lX = x;
-    else
-        deltaDiff = 0;
-    end
-    
-    bisectionIterations = [bisectionIterations x];
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
+%% Show results
+%% Raw values
+for p = 1 : testPointsCount
+    xTest(p), yTest(p)
 end
 
-if deltaDiff ~= 0
-    x = lX + deltaDiff * 0.25;
-    bisectionIterations = [bisectionIterations x];
+%% Absolute error values
+absoluteErrors = absoluteError(yTest, f(xTest));  % see section 6.3.6
+for p = 1 : testPointsCount
+    xTest(p), absoluteErrors(p)
 end
-correctBisectionDigits = numberOfCorrectDigits(bisectionIterations, correctSolution);  % compute number of correct digit per iteration
 
-%% Anonymous fixed-point method
-ptFixedNext = @(x) 2 + (x - 2) ^ 4;  % method to calculate next iteration
-numberOfIterations = 0;
-x = startPoint;
-iterations = [x];  % list that will contain iteration values
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    xNew = feval(ptFixedNext, x);
-    deltaDiff = abs(x - xNew);
-    x = xNew;
-    iterations = [iterations x];
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
-end
-correctDigits = numberOfCorrectDigits(iterations, correctSolution);  % compute number of correct digit per iteration
-
-%% Plot results
+%% Plot approximations and errors
 figure  % initalize plot
 
 %% Iterations
-plot(linspacearray(bisectionIterations), bisectionIterations, '-');  % plot iterations
+plot(xTest, yTest, '-o');  % plot approximation
 hold on  % wait before showing plot
-plot(linspacearray(iterations), iterations, '--');  % plot iterations
+plot(xTest, f(xTest), '-');  % plot correct values
 hold on  % wait before showing plot
-
-%% Digits
-plot(linspacearray(correctBisectionDigits), correctBisectionDigits, 'x');  % plot digits
-hold on  % wait before showing plot
-plot(linspacearray(correctDigits), correctDigits, '*');  % plot digits
+plot(xTest, absoluteErrors, '-x');  % plot errors
 hold on  % wait before showing plot
 
-xlabel('iterations');  % add axis labels to plot
-ylabel('solution approximation and number of correct digits');
-title('Bisection method VS (2 + (x - 2)^4 to solve f(x) =  x^4-8 * x^ 3 + 24 * x^2 - 33 * x + 18 = 0');  % add title
-legend('Bisection method', 'other method', 'number of correct digits with bisection method', 'number of correct digits with other method');  % add legend
+xlabel('x');  % add axis labels to plot
+ylabel('approximation, correct values and error');
+title('Approximating f(x) = exp(2x) / x^3 with Newton method in [2, 5]');  % add title
+legend('Approximation', 'f(x)', 'Errors');  % add legend
 hold off  % release lock and show plot

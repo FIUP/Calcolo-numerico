@@ -1,5 +1,5 @@
 function [yVal] = lagrangeApproximate(x, y, xVal)
-% LAGRAMGEAPPROXIMATE given vectors x, y finds approximation of yVal using
+% LAGRANGEAPPROXIMATE given vectors x, y finds approximation of yVal using
 % Lagrange method.
 %
 %  [yApproximation] = lagrangeApproximate(x, y, xVal)
