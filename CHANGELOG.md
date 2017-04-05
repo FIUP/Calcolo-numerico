@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.3.4 - 2017-04-05
 
 ### Added
-- forwardFiniteDifferencesTable
+- forwardFiniteDifferencesTable and binomial way
 
 ## 0.3.3 - 2017-04-03
 
