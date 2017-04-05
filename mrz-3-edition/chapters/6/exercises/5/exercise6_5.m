@@ -21,6 +21,7 @@ function exercise6_5 ()
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
+%% Input
 f = @(x) exp(2 * x) ./ x .^ 3;  % function
 intervalStart = 2;  % interval
 intervalEnd = 5;

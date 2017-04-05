@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - forwardFiniteDifferencesTable and binomial way
+- exercise 6.6
 
 ## 0.3.3 - 2017-04-03
 
