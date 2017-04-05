@@ -4,7 +4,7 @@ function exercise3_6 ()
 % exercise3_6 ()
 %
 % Use Newton method to solve f(x) = 0. Then use a different pt-fixed method
-% and plot the comparison.
+% and plot the comparison..
 
 % Copyright 2017 Stefano Fogarollo
 %
