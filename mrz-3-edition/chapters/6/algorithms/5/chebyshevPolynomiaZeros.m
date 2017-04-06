@@ -1,23 +1,13 @@
-function [x, p, c, numberOfIterations] = convergenceEvaluation (tolerance, maxIterations)
-% CONVERGENCEEVALUATION Finds the convergence order of a sample method (in
-% this case the secant method). Moreover it returns the error reduction
-% factor.
-% More in detail, we use a sample function (i.e f(x) = a - 1/x, find a
-% solution of the equation f(x) = 0, and meanwhile we compute the
-% convergence order and error reduction factor.
+function [z] = chebyshevPolynomiaZeros (n)
+% CHEBYSHEVPOLYNOMIAZEROS Finds the zeros of the n-th Chebyshev polynomial.
 %
-%  [x, p, c, numberOfIterations] = convergenceEvaluation (tolerance, maxIterations)
+%  [z] = chebyshevPolynomiaZeros (n)
 %
 % Input:
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
-%
+% n - degree of the polynomial
+% 
 % Output:
-% x - solution of the equation
-% p - convergence order
-% c - error reduction factor
-% numberOfIterations - number of iterations executed before getting a solution
+% z - vector with the zeros.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -33,36 +23,15 @@ function [x, p, c, numberOfIterations] = convergenceEvaluation (tolerance, maxIt
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-deltaDiff = tolerance * 2;  % initialize diff
-a = 10^(-10);  % value of a in the equation f(x) = a - 1/x
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = a;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % null values
-c = -1;
-lastP = -1;  % null values
-lastC = -1;
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    numberOfIterations = numberOfIterations + 1;  % increase counter
-    
-    %% Compute secant method iteration
-    x = xN * (2 - a * xN);
-    deltaDiff = abs(x - xN);
-    
-    %% Update previous values
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    
-    %% Compute convergence order
-    if numberOfIterations == maxIterations % last iteration -> calculate p, c
-        p = lastP;
-        c = lastC;
-    else
-        lastP = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-        lastC = (abs(xN - xN1) / abs(xN1 - xN2)) ^ p;
-    end
+z = zeros(1, n);  % pre-allocate out vector
+for i = 0 : n - 1
+    b = (2 * i + 1) / (2 * n);
+    z(i + 1) = cos(b * pi);
 end
+
+if mod(n, 2) ~= 0  % n is odd
+    k = floor(n / 2);  % index in the middle of z
+    z(k + 1) = 0;
+end
+
+z = sort(z);  % sorted roots - aesthetic taste only

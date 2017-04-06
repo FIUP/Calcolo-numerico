@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.3.5 - 2017-04-06
 
 ### Added
-- chebyshevPolynomia builder
+- chebyshevPolynomia builder, chebyshevPolynomiaZeros finder
 
 ## 0.3.4 - 2017-04-05
 
