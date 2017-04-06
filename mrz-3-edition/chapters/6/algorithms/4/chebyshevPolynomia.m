@@ -1,21 +1,15 @@
-function [x, numberOfIterations] = halley(f, fDerivative, f2Derivative, startPoint, tolerance, maxIterations)
-% HALLEY: Finds a solution of f(x) = 0 with Halley method.
+function [c] = chebyshevPolynomia(n)
+% CHEBYSHEVPOLYNOMIAL: Finds the coefficients of the n-degree Chebyshev
+% polynomial.
 %
-%  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, f2Derivative, startPoint, tolerance, maxIterations, r)
-%
+% [c] = chebyshevPolynomia(n)
+% 
 % Input:
-% f - 'f' function in the equation 'f(x) = 0'
-% fDerivative - derivative of f
-% f2Derivative - derivative of derivative of f
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
-%
+% n - degree of the polynomial
+% 
 % Output:
-% x - approximation of solution of 'f(x) = 0'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
+% c - vector with the coefficients. The coefficients are given in reversed
+% form, that is c = [3 1 4] means the polynomial is 3x² + x + 4.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -31,16 +25,29 @@ function [x, numberOfIterations] = halley(f, fDerivative, f2Derivative, startPoi
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    fx = feval(f, x);  % evaluate f(x), f'(x), f''(x)
-    fDx = feval(fDerivative, x);
-    fDDx = feval(f2Derivative, x);
+if n == 0  % side case
+    c = [1];
+elseif n == 1  % line
+    c = [1 0];
+else
+    %% Initialize dp problem
+    tk2 = zeros(1, n + 1);  % contains the T_{k - 2}(x) coefficients
+    tk1 = zeros(1, n + 1);  % contains the T_{k - 1}(x) coefficients
+    c = zeros(1, n + 1);  % contains the T_{k}(x) coefficients
+    tk2(3) = 1;
+    tk1(1) = 1;
     
-    deltaDiff = - 2 * (fx * fDx) / (2 * (fDx ^ 2) - fx * fDDx);
-    x = x + deltaDiff;
-    deltaDiff = abs(deltaDiff);
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
+    %% Use T_{k-2}(x) and T_{k-1}(x) to dp-solve c
+    for k = 3 : n + 1
+        for i = 1 : k
+            c(i) = 2 * tk1(i) - tk2(i);  % Chebyshev polynomia 3-item relationship
+        end
+        
+        for i = 1 : k - 1
+            tk2(i + 2) = tk1(i);  % update values
+            tk1(i) = c(i);
+        end
+        
+        tk1(k) = c(k);
+    end
 end
