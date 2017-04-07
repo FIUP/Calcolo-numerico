@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.3.6 - 2017-04-07
 
 ### Added
-- exercise6_7 with image
+- exercise6_7 with image, exercise6_4
 
 ## 0.3.5 - 2017-04-06
 

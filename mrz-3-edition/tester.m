@@ -88,10 +88,10 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % exercise6_1();  % exercise 6.1
 % exercise6_2();  % TODO % exercise 6.2
 % exercise6_3();  % TODO % exercise 6.3
-% exercise6_4();  % TODO WTF dunno understand what exercise want me to do
+exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.414213562373095 0.349241122458488 -0.041104472283004 0.009243006108162 -0.002486810899427], [1.414213562373095 0.349241122458488 -0.041104472283004 0.009243006108147 -0.002486810899327]
 % exercise6_5();  % exercise 6.5
 % exercise6_6();  % exercise 6.6
-% exercise6_7();  % TODO % exercise 6.7
+% exercise6_7();  % exercise 6.7
 % exercise6_8();  % TODO % exercise 6.8
 % exercise6_9();  % TODO % exercise 6.9
 % exercise6_10();  % TODO % exercise 6.10

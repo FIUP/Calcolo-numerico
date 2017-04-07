@@ -1,11 +1,17 @@
-function steffensenPlotter (startPoint)
-% STEFFENSENPLOTTER Plots iterations of Steffensen methods for a given
-% equation.
+function [newtonCoeffs, divDiffCoeffs] = exercise6_4 (xTrain, yTrain)
+% EXERCISE6_4 Solves exercise 6.4 of book. Compares 2 methods to find the
+% coefficients of the interpolation polynomial.
 %
-% steffensenPlotter (startPoint)
+% exercise6_4 (xTrain, yTrain)
 %
 % Input:
-% startPoint - starting point of method
+% xTrain - n + 1 nodes
+% yTrain - f(xTrain)
+%
+% Output:
+% newtonCoeffs - coefficients of interpolation using Newton method
+% divDiffCoeffs - coefficients of interpolation using divided differences
+%                 table
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -21,40 +27,21 @@ function steffensenPlotter (startPoint)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-%% Input settings
-f = @(x) 4 / x;
-correctSolution = 2;
-tolerance = 10 ^ (-8);
-maxIterations = 100;
+n = length(xTrain) - 1;  % degree of interpolation polynomail
 
-%% Steffensen method
-numberOfIterations = 0;
-x = startPoint;
-iterations = [x];  % list that will contain iteration values
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    u0 = x;  % build aitken list
-    u1 = feval(f, u0);
-    u2 = feval(f, u1);
-    xNew = aitken([u0 u1 u2]);
-    deltaDiff = abs(x - xNew);
-    x = xNew;
-    iterations = [iterations x];
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
+%% Newton method
+newtonCoeffs = zeros(1, n + 1);  % pre allocate for performance
+newtonCoeffs(1) = yTrain(1);
+for i = 2 : n + 1
+    d = xTrain(i) - xTrain(i - 1);  % delta on x
+    u = newtonCoeffs(i - 1);  % previous coeff
+    for j = i - 2 : -1 : 1
+        u = u * (xTrain(i) - xTrain(j)) + newtonCoeffs(j);
+        d = d * (xTrain(i) - xTrain(j));
+    end
+    newtonCoeffs(i) = (yTrain(i) - u) / d;
 end
 
-correctDigits = numberOfCorrectDigits(iterations, correctSolution);  % compute number of correct digit per iteration
-
-%% Plot results
-figure  % initalize plot
-plot(linspacearray(iterations), iterations, '-');  % plot iterations
-hold on  % wait before showing plot
-
-plot(linspacearray(correctDigits), correctDigits, '--');  % plot digits
-hold on  % wait before showing plot
-
-xlabel('iterations');  % add axis labels to plot
-ylabel('solution approximation and number of correct digits');
-title('Steffensen method to solve f(x) = 4 / x = x');  % add title
-legend('Steffensen method', 'number of correct digits');  % add legend
-hold off  % release lock and show plot
+%% Divided differences method
+divDiffTable = dividedDifferencesTable(xTrain, yTrain);
+divDiffCoeffs = divDiffTable(1, :);  % get first line

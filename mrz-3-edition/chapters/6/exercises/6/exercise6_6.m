@@ -32,8 +32,8 @@ yTrain = f(xTrain);
 
 %% Recursive method
 table = forwardFiniteDifferencesTable(xTrain, yTrain, []);
-diag(flip(table))'  % display diagonal elements
+table(1, :)  % display coefficients
 
 %% Binomial way
 table = lazyForwardFiniteDifferencesTable(xTrain, yTrain, []);
-diag(flip(table))'  % display diagonal elements
+table(1, :)  % display coefficients
