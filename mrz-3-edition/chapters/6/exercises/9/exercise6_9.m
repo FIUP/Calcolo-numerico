@@ -1,10 +1,10 @@
-function exercise3_7 ()
-% EXERCISE3_7 Solves exercse 3.7 of book.
+function exercise6_9 ()
+% EXERCISE6_9 Solves exercise 6.9 of book.
 %
-% exercise3_7 ()
+% exercise6_9 ()
 %
-% Use bisection method to solve f(x) = 0. Then use a different pt-fixed method
-% and plot the comparison.
+% Given x, y values finds the regression line (using Cramer method) and
+% plots values.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -21,102 +21,23 @@ function exercise3_7 ()
 % limitations under the License.
 
 %% Input settings
-f = @(x) exp(-3 * x) - x + 1;
-correctSolution = 1.043673240055106430058022568879629475614392531240681;
-tolerance = 10 ^ (-8);
-maxIterations = 40;
-startPoint = 1.5;
+x = linspace(0, 1, 9);
+y = [1 1.0078 1.0308 1.068 1.118 1.1792 1.25 1.3288 1.4142];
+w = ones(1, length(x));
+n = 1;  % regression line
 
-%% Bisection method
-numberOfIterations = 0;
-lX = 1;
-rX = 1.5;
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = startPoint;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % convergence order
-bisectionIterations = [];  % list that will contain iteration values
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    rExt = feval(f, rX);
-    lExt = feval(f, lX);
-    x = lX + (rX - lX) * 0.5;
-    fX = feval(f, x);
-    
-    if lExt * rExt < 0
-        rX = x;
-    elseif lExt * rExt > 0
-        lX = x;
-    else
-        deltaDiff = 0;
-    end
-    
-    %% Update previous values and calculate convergence order
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    p = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-    
-    bisectionIterations = [bisectionIterations x];  
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
-    [numberOfIterations x p]  % display current values
-end
+%% Compute least-square method
+a = leastSquareCramerInterpolate(x, y, w, n);  % find polynomial with Cramer's rule
+disp('Squared error for regression line');
+squaredError = leastSquareError(a, x, y, w)  % compute errorplot
 
-%% Method summary
-disp('Bisection method done!')
-disp('Solution')
-disp(x)
-disp('f(solution)')
-disp(feval(f, x))
-
-%% Anonymous fixed-point method
-ptFixedNext = @(x) (exp(-3 * x) * (3 * x + 1) + 1) / (3 * exp(-3 * x) + 1);  % method to calculate next iteration
-numberOfIterations = 0;
-x = startPoint;
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = startPoint;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % convergence order
-iterations = [x];  % list that will contain iteration values
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    xNew = feval(ptFixedNext, x);
-    deltaDiff = abs(x - xNew);
-    x = xNew;
-    
-    %% Update previous values and calculate convergence order
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    p = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-    
-    iterations = [iterations x];
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
-    [numberOfIterations x p]  % display current values
-end
-
-%% Method summary
-disp('Fixed-point method done!')
-disp('Solution')
-disp(x)
-disp('f(solution)')
-disp(feval(f, x))
-
-%% Plot results
-figure  % initalize plot
-
-%% Iterations
-plot(linspacearray(bisectionIterations), bisectionIterations, '-');  % plot iterations
+%% Plot
+plot(x, y, '-*');  % plot tabulation
 hold on  % wait before showing plot
-plot(linspacearray(iterations) - 1, iterations, '--');  % plot iterations
+plot(x, a(2) * x + a(1), '-^');  % plot interpolation polynomial
 hold on  % wait before showing plot
-
-xlabel('iterations');  % add axis labels to plot
-ylabel('solution approximation and number of correct digits');
-title('Bisection method VS (exp(-3 * x) * (3 * x + 1) + 1) / (3 * exp(-3 * x) + 1) to solve f(x) = exp(-3 * x) - x + 1 = 0');  % add title
-legend('Bisection method', 'other method');  % add legend
-hold off  % release lock and show plot
+xlabel('x');  % add axis labels to plot
+ylabel('interpolation values');
+title('Regression line');  % add title
+legend('Values', 'Fit');  % add legend
+hold off;  % plot

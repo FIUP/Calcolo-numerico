@@ -93,8 +93,8 @@ exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.4142135623730
 % exercise6_6();  % exercise 6.6
 % exercise6_7();  % exercise 6.7
 % exercise6_8();  % exercise 6.8
-% exercise6_9();  % TODO % exercise 6.9
-% exercise6_10();  % TODO % exercise 6.10
+% exercise6_9();  % exercise 6.9
+% exercise6_10(); % exercise 6.10
 
 %% chapter 7
 % algorithms

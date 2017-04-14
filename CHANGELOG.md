@@ -4,10 +4,11 @@ All notable changes to this project will be documented in this file.
 ## 0.3.7 - 2017-04-14
 
 ### Added
-- exercise 6.8, 6.10 with images
+- exercise 6.8, 6.10, 6.9 with images
 - least square method
 - squared error function
-- (prepared file for) evaluation of polynomial in multiple points 
+- (prepared file for) evaluation of polynomial in multiple points
+- cramer solver
 
 ## 0.3.6 - 2017-04-07
 
