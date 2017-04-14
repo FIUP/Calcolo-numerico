@@ -1,10 +1,9 @@
-function exercise3_8 ()
-% EXERCISE3_8 Solves exercse 3.8 of book.
+function exercise6_10 ()
+% EXERCISE6_10 Solves exercise 6.10 of book.
 %
-% exercise3_8 ()
+% exercise6_10 ()
 %
-% Use Newton method to solve f(x) = 0. Then use a different pt-fixed method
-% and plot the comparison.
+% Given x, y values finds the regression line and plots values.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -21,143 +20,23 @@ function exercise3_8 ()
 % limitations under the License.
 
 %% Input settings
-f = @(x) x^2/(x - 0.6) - 2.4;
-fDerivative = @(x) (2*x)/(x - 3/5) - x^2/(x - 3/5)^2;  % derivative of f(x)
-f2Derivative = @(x) 2/(x - 3/5) - (4*x)/(x - 3/5)^2 + (2*x^2)/(x - 3/5)^3;  % f''(x)
-correctSolution = 1.2;
-tolerance = 10 ^ (-8);
-maxIterations = 40;
-startPoint = 2;
+x = [0 0.17 0.34 0.51 0.68 0.85 1.02 1.19 1.36 1.53 1.7 1.87];
+y = [0.31 0.237 0.249 0.419 0.535 0.575 0.609 0.429 0.169 0.0 -0.017 -0.179];
+w = [1 1 20 1 1 1 1 1 1 1 20 1];
+n = 1;  % regression line
 
-%% Newton method
-numberOfIterations = 0;
-derivativeZero = false;
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = startPoint;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % convergence order
-x = startPoint;
-simpleNewtonIterations = [x];  % list of iterations
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue ~= 0
-        deltaDiff = - feval(f, x) / derivativeValue;
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
-        simpleNewtonIterations = [ simpleNewtonIterations x];
-    end
-    
-    %% Update previous values and calculate convergence order
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    p = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-    
-    numberOfIterations = numberOfIterations + 1;  % increase counter
-    [numberOfIterations x feval(f, x) p]  % display current values
-end
+%% Compute least-square method
+a = leastSquareInterpolate(x, y, w, n);  % find polynomial
+disp('Squared error for regression line');
+squaredError = leastSquareError(a, x, y, w)  % compute errorplot
 
-%% Method summary
-disp('Newton method done!')
-disp('Solution')
-disp(x)
-disp('f(solution)')
-disp(feval(f, x))
-
-%% Multiple-roots Newton method
-numberOfIterations = 0;
-derivativeZero = false;
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = startPoint;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % convergence order
-r = 2;  % multiplicity
-x = startPoint;
-mulNewtonIterations = [x];  % list of iterations
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue ~= 0
-        deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
-        mulNewtonIterations = [ mulNewtonIterations x];
-    end
-    
-    %% Update previous values and calculate convergence order
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    p = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-    
-    numberOfIterations = numberOfIterations + 1;  % increase counter
-    [numberOfIterations x feval(f, x) p]  % display current values
-end
-
-%% Method summary
-disp('Multiple-roots Newton method done!')
-disp('Solution')
-disp(x)
-disp('f(solution)')
-disp(feval(f, x))
-
-%% Halley method
-numberOfIterations = 0;
-derivativeZero = false;
-xN3 = 0;  % x_{n-3}, i.e the previous of the previous of the previous solution
-xN2 = 0;  % x_{n-2}, i.e the previous of the previous solution
-xN1 = 0;  % x_{n-1}, i.e the previous solution we computed, the second starting point
-xN = startPoint;  % x_n, i.e the current value of solution, the starting point
-p = -1;  % convergence order
-x = startPoint;
-halleyIterations = [x];  % list of iterations
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
-    fx = feval(f, x);  % evaluate f(x), f'(x), f''(x)
-    fDx = feval(fDerivative, x);
-    fDDx = feval(f2Derivative, x);
-    
-    deltaDiff = - 2 * (fx * fDx) / (2 * (fDx ^ 2) - fx * fDDx);
-    x = x + deltaDiff;
-    deltaDiff = abs(deltaDiff);
-    
-    %% Update previous values and calculate convergence order
-    xN3 = xN2;
-    xN2 = xN1;
-    xN1 = xN;
-    xN = x;
-    p = log(abs(xN - xN1) / abs(xN1 - xN2)) / log(abs(xN1 - xN2) / abs(xN2 - xN3));
-    
-    halleyIterations = [halleyIterations x];
-    numberOfIterations = numberOfIterations + 1;  % increase counter
-    [numberOfIterations x feval(f, x) p]  % display current values
-end
-
-%% Method summary
-disp('Halley method done!')
-disp('Solution')
-disp(x)
-disp('f(solution)')
-disp(feval(f, x))
-
-%% Plot results
-figure  % initalize plot
-
-%% Iterations
-plot(linspacearray(simpleNewtonIterations), simpleNewtonIterations, '-');  % plot iterations
+%% Plot
+plot(x, y, '-*');  % plot tabulation
 hold on  % wait before showing plot
-plot(linspacearray(mulNewtonIterations), mulNewtonIterations, '--');  % plot iterations
+plot(x, a(2) * x + a(1), '-^');  % plot interpolation polynomial
 hold on  % wait before showing plot
-plot(linspacearray(halleyIterations), halleyIterations, 'x');  % plot iterations
-hold on  % wait before showing plot
-
-xlabel('iterations');  % add axis labels to plot
-ylabel('solution approximation and number of correct digits');
-title('Newton method VS Multiple-roots Newton VS Halley to solve f(x) = x^2/(x - 0.6) - 2.4 = 0');  % add title
-legend('Newton method', 'Multiple-roots Newton method', 'Halley method');  % add legend
-hold off  % release lock and show plot
+xlabel('x');  % add axis labels to plot
+ylabel('interpolation values');
+title('Regression line');  % add title
+legend('Values', 'Fit');  % add legend
+hold off;  % plot

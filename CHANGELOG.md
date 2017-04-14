@@ -4,12 +4,15 @@ All notable changes to this project will be documented in this file.
 ## 0.3.7 - 2017-04-14
 
 ### Added
-- exercise 6_8 with image
+- exercise 6.8, 6.10 with images
+- least square method
+- squared error function
+- (prepared file for) evaluation of polynomial in multiple points 
 
 ## 0.3.6 - 2017-04-07
 
 ### Added
-- exercise6_7 with image, exercise6_4
+- exercise6.7 with image, exercise6.4
 
 ## 0.3.5 - 2017-04-06
 
