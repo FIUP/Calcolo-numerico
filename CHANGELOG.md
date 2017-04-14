@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.8 - 2017-04-14
+
+### Added
+- upper/lower triangular matrix solver functions
+
 ## 0.3.7 - 2017-04-14
 
 ### Added

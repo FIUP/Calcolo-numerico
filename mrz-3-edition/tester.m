@@ -70,6 +70,8 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 
 %% chapter 4
 % algorithms
+upTriangSolver([1 3; 0 4], [3 5]');  % [-0.75 1.25]'
+lowTriangSolver([1 0; 3 4], [3 5]');  % [3 -1]'
 % exercises
 
 %% chapter 5
