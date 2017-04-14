@@ -7,7 +7,7 @@ function [y] = polynomialHornerEvaluationInPoint (a, x)
 % employes Horner evaluation to evaluate it in point.
 %
 % Input:
-% a - array: a[i] is the i-th coeffient of the polynomial
+% a - array: a[i] is the x^i coeffient of the polynomial
 % x - point where to evaluate polynomial
 %
 % Output:

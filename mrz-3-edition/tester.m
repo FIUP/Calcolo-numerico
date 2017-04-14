@@ -17,7 +17,7 @@
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-clear all; close all; clc;  % remove all values in memory
+close all; clc;  % clear memory
 
 %% chapter 1
 % algorithms
@@ -92,7 +92,7 @@ exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.4142135623730
 % exercise6_5();  % exercise 6.5
 % exercise6_6();  % exercise 6.6
 % exercise6_7();  % exercise 6.7
-% exercise6_8();  % TODO % exercise 6.8
+% exercise6_8();  % exercise 6.8
 % exercise6_9();  % TODO % exercise 6.9
 % exercise6_10();  % TODO % exercise 6.10
 
