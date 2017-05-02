@@ -1,6 +1,6 @@
-function [L, Uy] = gaussLuSolver(Ab)
-% GAUSSLUSOLVER: Solves Ax = b where A is a nonsingular matrix with Gauss
-% method.
+function [L, Uy] = gaussPivotingSolver(Ab)
+% GAUSSPIVOTINGSOLVER: Solves Ax = b where A is a nonsingular matrix with
+% Gauss pivoting method.
 %
 %  [L, Uy] = gaussLuSolver(Ab)
 %
@@ -30,19 +30,36 @@ n = size(Ab, 1);  % number of rows of A
 L = ones(n, n);
 U = Ab;  % copy matrix
 
-%% Initialize L
-for i = 1 : n
-    for j = i + 1 : n
-        L(i, j) = 0;  % all zeros but the diagonal
+%% Gauss algorithm with pivoting
+for k = 1 : n - 1
+    r = k;  % r such that |U(r, k)| is max of |U(i, k)| for k <= i <= n
+    maxV = abs(U(r, k));
+    for i = k : n
+        if abs(U(i, k)) > maxV
+            maxV = abs(U(i, k));
+            r = i;
+        end
+    end
+    
+    if r ~= k
+        tmpRow = U(r, :);  % swap r-th row and k-th row of U
+        U(r, :) = U(k, :);
+        U(k, :) = tmpRow;
+    end
+    
+    for i = k + 1 : n
+        U(i, k) = U(i, k) / U(k, k);
+        for j = k + 1 : n + 1
+            U(i, j) = U(i, j) - U(i, k) * U(k, j);
+        end
     end
 end
 
-%% Initialize U with Gauss algorithm
-for k = 1 : n -1
-    for i = k + 1 : n
-        L(i, k) = U(i, k) / U(k, k);
-        for j = k : n + 1
-            U(i, j) = U(i, j) - L(i, k) * U(k, j);
-        end
+%% Build L and zero U
+for i = 1 : n
+    for j = i + 1 : n
+        L(i, j) = 0;
+        L(j, i) = 0;
+        U(j, i) = 0;
     end
 end
