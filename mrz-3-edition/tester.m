@@ -72,6 +72,13 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 % algorithms
 upTriangSolver([1 3; 0 4], [3 5]');  % [-0.75 1.25]'
 lowTriangSolver([1 0; 3 4], [3 5]');  % [3 -1]'
+[L, U, y] = gaussLuSolver([1 7 8; 1 3 1; 5 4 3], [9 8 2]');
+x = upTriangSolver(U, y);  % [-1.4348 3.8261 -2.0435]'
+[L, U, y] = gaussPivotingSolver([1 1 1; 0 2 5; 2 5 -1], [6 -4 27]');
+x = upTriangSolver(U, y);  % [5 3 -2]'
+[L, U] = gaussCroutLuFactor([4 2 1; 9 8 7; 2 2 9]);  % [4 0 0; 9 3.5 0; 2 1 7.1429], [1 0.5 0.25; 0 1 1.3571; 0 0 1]
+[L] = choleskyFactorization([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
+
 % exercises
 
 %% chapter 5

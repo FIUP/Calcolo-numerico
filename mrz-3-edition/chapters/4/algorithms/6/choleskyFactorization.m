@@ -25,6 +25,7 @@ function [L] = choleskyFactorization(A)
 % limitations under the License.
 
 
+n = size(A, 1);
 if A(1, 1) <= 0
     error('Cannot perform Cholesky factorization: A(1, 1) <= 0');
 else

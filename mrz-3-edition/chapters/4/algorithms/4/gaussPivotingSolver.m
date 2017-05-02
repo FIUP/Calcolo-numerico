@@ -1,15 +1,17 @@
-function [L, Uy] = gaussPivotingSolver(Ab)
+function [L, U, y] = gaussPivotingSolver(A, b)
 % GAUSSPIVOTINGSOLVER: Solves Ax = b where A is a nonsingular matrix with
 % Gauss pivoting method.
 %
-%  [L, Uy] = gaussLuSolver(Ab)
+%  [L, U, y] = gaussLuSolver(Ab)
 %
 % Input:
-% Ab - Matrix n x (n + 1), last column is b
+% A - matrix n x n
+% b - vector known terms
 %
 % Output:
 % L - L matrix of LU-factorization (low triangular)
-% Uy - Matrix n x (n + 1), last column is b (upper triangular)
+% U - U matrix of LU-factorization (upper triangular)
+% y - vector to solve equation Ux = y, x such that Ax = b
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -25,8 +27,9 @@ function [L, Uy] = gaussPivotingSolver(Ab)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-
-n = size(Ab, 1);  % number of rows of A
+Ab = A;
+n = size(A, 1);  % number of columns of A
+Ab(:, n + 1) = b;  % add known terms vector
 L = ones(n, n);
 U = Ab;  % copy matrix
 
@@ -63,3 +66,6 @@ for i = 1 : n
         U(j, i) = 0;
     end
 end
+
+y = U(:, n + 1);
+U(:, n + 1) = [];
