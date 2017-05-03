@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.4 - 2017-05-03
 
 ### Added
-- gaussPivotingWithPermutationSolver exercise
+- gaussPivotingWithPermutationSolver, 4.2 exercises
 
 ## 0.3.9 - 2017-05-02
 

@@ -77,10 +77,12 @@ upTriangSolver(U, y);  % [-1.4348 3.8261 -2.0435]'
 [~, U, y] = gaussPivotingSolver([1 1 1; 0 2 5; 2 5 -1], [6 -4 27]');
 x = upTriangSolver(U, y);  % [5 3 -2]'
 gaussCroutLuFactor([4 2 1; 9 8 7; 2 2 9]);  % [4 0 0; 9 3.5 0; 2 1 7.1429], [1 0.5 0.25; 0 1 1.3571; 0 0 1]
-choleskyFactorgaussPivotingWithPermutationSolverization([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
+choleskyFactorization([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
 
 % exercises
 gaussPivotingWithPermutationSolver([2 1 3; 4 3 10; 2 4 17], [11 28 31]');  % example 4.3 in book
+[P, ~, U, y] = gaussPivotingWithPermutationSolver([10 7 1 -1 2; 3 1 -3 7 8; -4 7 2 4 2; 9 -1 2 -3 5; 6 -6 4 9 1], [14 19 21 8 16]');  % exercise 4.2
+upTriangSolver(U, y)  % [0.1546 1.2336 1.9710 1.4386 1.6432]'
 
 %% chapter 5
 % algorithms
