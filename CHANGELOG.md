@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4 - 2017-05-03
+
+### Added
+- gaussPivotingWithPermutationSolver exercise
+
 ## 0.3.9 - 2017-05-02
 
 ### Added
