@@ -62,7 +62,7 @@ end
 for i = 1 : n
     for j = i + 1 : n
         L(i, j) = 0;
-        L(j, i) = 0;
+        L(j, i) = A(j, i);
         U(j, i) = 0;
     end
 end

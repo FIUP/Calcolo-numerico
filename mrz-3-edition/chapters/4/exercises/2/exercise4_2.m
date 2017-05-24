@@ -20,5 +20,11 @@ function exercise4_2 ()
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-[~, ~, U, y] = gaussPivotingWithPermutationSolver([10 7 1 -1 2; 3 1 -3 7 8; -4 7 2 4 2; 9 -1 2 -3 5; 6 -6 4 9 1], [14 19 21 8 16]');
+[~, ~, U, y] = gaussPivotingWithPermutationSolver([
+        10 7 1 -1 2;
+        3 1 -3 7 8;
+        -4 7 2 4 2
+        9 -1 2 -3 5;
+        6 -6 4 9 1
+    ], [14 19 21 8 16]');
 upTriangSolver(U, y)

@@ -1,8 +1,8 @@
-function [P, L, U, y] = gaussPivotingWithPermutationSolver(A, b)
-% GAUSSPIVOTINGWITHPERMUTATIONSOLVER: Solves Ax = b where A is a
-% nonsingular matrix with Gauss pivoting method.
+function [P, Q, L, U, y] = gaussTotalPivotingWithPermutationsSolver(A, b)
+% GAUSSTOTALPIVOTINGWITHPERMUTATIONSSOLVER: Solves Ax = b where A is a nonsingular matrix with
+% Gauss complete pivoting method.
 %
-%  [P, L, U, y] = gaussPivotingWithPermutationSolver(Ab)
+%  [P, Q, L, U, y] = gaussTotalPivotingWithPermutationsSolve(Ab)
 %
 % Input:
 % A - matrix n x n
@@ -10,6 +10,7 @@ function [P, L, U, y] = gaussPivotingWithPermutationSolver(A, b)
 %
 % Output:
 % P - Permutation matrix such that PA = LU
+% Q - Permutation vector of columns to swap solution aftwerards
 % L - L matrix of LU-factorization (low triangular)
 % U - U matrix of LU-factorization (upper triangular)
 % y - vector to solve equation Ux = y, x such that Ax = b
@@ -34,21 +35,31 @@ Ab(:, n + 1) = b;  % add known terms vector
 L = ones(n, n);
 U = Ab;  % copy matrix
 
-%% Initialize permutation vector
-vp = zeros(1, n);
+%% Initialize permutation vectors
+vpRows = zeros(1, n);
 for i = 1 : n
-    vp(i) = i;
+    vpRows(i) = i;
 end
-vp = vp';  % array -> vector
+vpRows = vpRows';  % array -> vector
+
+vpCols = zeros(1, n);
+for i = 1 : n
+    vpCols(i) = i;
+end
+vpCols = vpCols';  % array -> vector
 
 %% Gauss algorithm with pivoting
 for k = 1 : n - 1
-    r = k;  % r such that |U(r, k)| is max of |U(i, k)| for k <= i <= n
-    maxV = abs(U(r, k));
+    r = k;  % r, s such that |U(r, s)| is max of |U(i, j)| for k <= i, j <= n
+    s = k;
+    maxV = abs(U(r, s));
     for i = k : n
-        if abs(U(i, k)) > maxV
-            maxV = abs(U(i, k));
-            r = i;
+        for j = k : n
+            if abs(U(i, j)) > maxV
+                maxV = abs(U(i, j));
+                r = i;
+                s = j;
+            end
         end
     end
     
@@ -57,9 +68,19 @@ for k = 1 : n - 1
         U(r, :) = U(k, :);
         U(k, :) = tmpRow;
         
-        tmpValPermVector = vp(r);  % update permutation vector too
-        vp(r) = vp(k);
-        vp(k) = tmpValPermVector;
+        tmpValPermVector = vpRows(r);  % update permutation vector too
+        vpRows(r) = vpRows(k);
+        vpRows(k) = tmpValPermVector;
+    end
+    
+    if s ~= k
+        tmpCol = U(:, s);  % swap s-th col and k-th col of U
+        U(:, s) = U(:, k);
+        U(:, k) = tmpCol;
+        
+        tmpValPermVector = vpCols(s);  % update permutation vector too
+        vpCols(s) = vpCols(k);
+        vpCols(k) = tmpValPermVector;
     end
     
     for i = k + 1 : n
@@ -86,10 +107,12 @@ U(:, n + 1) = [];
 %% Build permutation matrix
 P = eye(n);  % identity matrix
 for i = 1 : n  % loop through rows
-    rowToSwap = vp(i);
+    rowToSwap = vpRows(i);
     if i ~= rowToSwap  % avoid swapping exact same rows for better performance
         tmpRow = P(i, :);  % swap rows
         P(i, :) = P(rowToSwap, :);
         P(rowToSwap, :) = tmpRow;
     end
 end
+
+Q = vpCols;

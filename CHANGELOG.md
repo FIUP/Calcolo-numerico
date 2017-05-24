@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4.1 - 2017-05-24
+### Fixed
+- L creation on Gauss solvers
+
+### Added
+- exercise 4.3
+
 ## 0.4 - 2017-05-03
 
 ### Added
