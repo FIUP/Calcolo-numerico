@@ -1,8 +1,8 @@
-function [P, Q, L, U, y] = gaussTotalPivotingWithPermutationsSolver(A, b)
-% GAUSSTOTALPIVOTINGWITHPERMUTATIONSSOLVER: Solves Ax = b where A is a nonsingular matrix with
+function [P, Q, L, U, y] = gaussFullPivotingPerm(A, b)
+% GAUSSFULLPIVOTINGWITHPERM: Solves Ax = b where A is a nonsingular matrix with
 % Gauss complete pivoting method.
 %
-%  [P, Q, L, U, y] = gaussTotalPivotingWithPermutationsSolve(Ab)
+%  [P, Q, L, U, y] = gaussFullPivotingPerm(Ab)
 %
 % Input:
 % A - matrix n x n

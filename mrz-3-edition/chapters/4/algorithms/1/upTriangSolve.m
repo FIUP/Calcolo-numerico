@@ -1,10 +1,14 @@
-function [x] = exercise4_2 ()
-% EXERCISE4_2 Solves exercse 4.2 of book.
+function [x] = upTriangSolve(U, b)
+% UPTRIANGSOLVE: Solves Ux = b where U is a upper triangular matrix
 %
-% exercise4_2 ()
+%  [x] = upTriangSolve(U, b)
 %
-% Compute L, U matrices with Gauss pivoting method. Store also the
-% permutation vector. Then calculate solution.
+% Input:
+% U - upper triangular matrix
+% b - known terms
+%
+% Output:
+% x - solution of Ux = b
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -20,11 +24,13 @@ function [x] = exercise4_2 ()
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-[~, ~, U, y] = gaussPivotingPerm([
-        10 7 1 -1 2;
-        3 1 -3 7 8;
-        -4 7 2 4 2
-        9 -1 2 -3 5;
-        6 -6 4 9 1
-    ], [14 19 21 8 16]');
-[x] = upTriangSolve(U, y);
+n = size(U, 1);  % num of rows (= num of columns)
+x = zeros(1, n);
+for i = n : -1 : 1
+    x(i) = b(i);
+    for j = i + 1 : n
+        x(i) = x(i) - U(i, j) * x(j);
+    end
+    x(i) = x(i) / U(i, i);
+end
+x = x';  % array -> vector

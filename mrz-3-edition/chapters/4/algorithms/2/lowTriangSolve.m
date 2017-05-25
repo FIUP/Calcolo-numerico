@@ -1,15 +1,14 @@
-
-function [c] = fromBase10Conversion (a, b)
-% FROMBASE10CONVERSION Convert number a from base 10 to number c in base b
+function [x] = lowTriangSolve(L, b)
+% LOWTRIANGSOLVE: Solves Lx = b where U is a lower triangular matrix
 %
-%  [c] = fromBase10Conversion (a, b)
+%  [x] = lowTriangSolve(L, b)
 %
 % Input:
-% a - integer number to convert from base 10; a should be >= 0
-% b - base to which convert number a; b must >= 2
+% L - lower triangular matrix
+% b - known terms
 %
 % Output:
-% c - number a converted to base b
+% x - solution of Ux = b
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -25,12 +24,13 @@ function [c] = fromBase10Conversion (a, b)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-a = abs(a);  % get absolute value
-c = [];
-while a ~= 0
-    q = floor(a / b);  % quotient
-    r = a - q * b;  % remainder
-    a = q;
-    c = [c, r];  % add new digit
+n = size(L, 1);  % num of rows (= num of columns)
+x = zeros(1, n);  % pre-allocate
+for i = 1 : n
+    x(i) = b(i);
+    for j = 1 : i - 1
+        x(i) = x(i) - L(i, j) * x(j);
+    end
+    x(i) = x(i) / L(i, i);
 end
-c = fliplr(c);  % flip
+x = x';  % array -> vector

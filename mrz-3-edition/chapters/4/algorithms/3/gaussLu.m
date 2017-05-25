@@ -1,8 +1,8 @@
-function [L, U, y] = gaussLuSolver(A, b)
-% GAUSSLUSOLVER: Solves Ax = b where A is a nonsingular matrix with Gauss
+function [L, U, y] = gaussLu(A, b)
+% GAUSSLU: Solves Ax = b where A is a nonsingular matrix with Gauss
 % method.
 %
-%  [L, Uy] = gaussLuSolver(Ab)
+%  [L, U, y] = gaussLu(Ab)
 %
 % Input:
 % A - matrix n x n
@@ -11,7 +11,7 @@ function [L, U, y] = gaussLuSolver(A, b)
 % Output:
 % L - L matrix of LU-factorization (low triangular)
 % U - U matrix of LU-factorization (upper triangular)
-% y - vector to solve equation Ux = y, x such that Ax = b
+% y - vector to solve equation Ux = y to find x such that Ax = b
 
 % Copyright 2017 Stefano Fogarollo
 %

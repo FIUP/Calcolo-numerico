@@ -1,8 +1,8 @@
-function [L, U, y] = gaussPivotingSolver(A, b)
-% GAUSSPIVOTINGSOLVER: Solves Ax = b where A is a nonsingular matrix with
+function [L, U, y] = gaussPivoting(A, b)
+% GAUSSPIVOTING: Solves Ax = b where A is a nonsingular matrix with
 % Gauss pivoting method.
 %
-%  [L, U, y] = gaussLuSolver(Ab)
+%  [L, U, y] = gaussPivoting(Ab)
 %
 % Input:
 % A - matrix n x n

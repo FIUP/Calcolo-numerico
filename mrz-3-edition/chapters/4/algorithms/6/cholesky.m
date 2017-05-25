@@ -1,5 +1,5 @@
-function [L] = choleskyFactorization(A)
-% CHOLESKYFACTORIZATION: Get L matrix from A such that L*L' = A using
+function [L] = cholesky(A)
+% CHOLESKY: Get L matrix from A such that L*L' = A using
 % Cholesky method
 %
 %  [L] = choleskyFactorization(A)

@@ -1,8 +1,8 @@
-function [L, U] = gaussCroutLuFactor(A)
-% GAUSSCROUTLUFACTOR: Get L, U matrices from A such that LU = A and L, U
+function [L, U] = gaussLuCrout(A)
+% GAUSSLUCROUT: Get L, U matrices from A such that LU = A and L, U
 % are triangular.
 %
-%  [L, U] = gaussCroutLuFacto(Ab)
+%  [L, U] = gaussLuCrout(Ab)
 %
 % Input:
 % A - Matrix n x n

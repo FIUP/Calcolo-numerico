@@ -21,7 +21,7 @@ close all; clc;  % clear memory
 
 %% chapter 1
 % algorithms
-fromBase10Conversion(4, 2);  % 100
+fromBase10Convert(4, 2);  % 100
 polynomialHornerEvaluationInPoint([2, 1, 1], 10);  % 211
 toBase10HornerConversion([15, 0, 1], 16);  % 3841
 
@@ -70,23 +70,24 @@ whyBisectLikeThis(0.982, 0.984);  % 0.983000000000000, 0.983000000000000
 
 %% chapter 4
 % algorithms
-upTriangSolver([1 3; 0 4], [3 5]');  % [-0.75 1.25]'
-lowTriangSolver([1 0; 3 4], [3 5]');  % [3 -1]'
-[~, U, y] = gaussLuSolver([1 7 8; 1 3 1; 5 4 3], [9 8 2]');
-upTriangSolver(U, y);  % [-1.4348 3.8261 -2.0435]'
-[~, U, y] = gaussPivotingSolver([1 1 1; 0 2 5; 2 5 -1], [6 -4 27]');
-x = upTriangSolver(U, y);  % [5 3 -2]'
-gaussCroutLuFactor([4 2 1; 9 8 7; 2 2 9]);  % [4 0 0; 9 3.5 0; 2 1 7.1429], [1 0.5 0.25; 0 1 1.3571; 0 0 1]
-choleskyFactorization([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
+upTriangSolve([1 3; 0 4], [3 5]');  % [-0.75 1.25]'
+lowTriangSolve([1 0; 3 4], [3 5]');  % [3 -1]'
+[~, U, y] = gaussLu([1 7 8; 1 3 1; 5 4 3], [9 8 2]');
+upTriangSolve(U, y);  % [-1.4348 3.8261 -2.0435]'
+[~, U, y] = gaussPivoting([1 1 1; 0 2 5; 2 5 -1], [6 -4 27]');
+x = upTriangSolve(U, y);  % [5 3 -2]'
+gaussLuCrout([4 2 1; 9 8 7; 2 2 9]);  % [4 0 0; 9 3.5 0; 2 1 7.1429], [1 0.5 0.25; 0 1 1.3571; 0 0 1]
+cholesky([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
 
 % exercises
-gaussPivotingWithPermutationSolver([
+gaussPivotingPerm([
     2 1 3;
     4 3 10;
     2 4 17
     ], [11 28 31]');  % example 4.3 in book with exercise 4.1 function
-% exercise4_2();  % [0.1546 1.2336 1.9710 1.4386 1.6432]'
+exercise4_2();  % [0.1546 1.2336 1.9710 1.4386 1.6432]'
 % exercise4_3();  % [7.5383 31.3009 -6.4753 -17.7043]'
+exercise4_4();  % [3.8 -6.2 2.8 -2.7 8.7 0.85 16.15]'
 
 %% chapter 5
 % algorithms

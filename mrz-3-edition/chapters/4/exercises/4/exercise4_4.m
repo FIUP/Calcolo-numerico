@@ -1,14 +1,9 @@
-function [x] = lowTriangSolver(L, b)
-% LOWTRIANGSOLVER: Solves Lx = b where U is a lower triangular matrix
+function [x] = exercise4_4 ()
+% EXERCISE4_4 Solves exercse 4.4 of book.
 %
-%  [x] = lowTriangSolver(L, b)
+% exercise4_4 ()
 %
-% Input:
-% L - lower triangular matrix
-% b - known terms
-%
-% Output:
-% x - solution of Ux = b
+% Solve linear system with Gauss-Doolitle LU factorization
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -24,13 +19,19 @@ function [x] = lowTriangSolver(L, b)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-n = size(L, 1);  % num of rows (= num of columns)
-x = zeros(1, n);  % pre-allocate
-for i = 1 : n
-    x(i) = b(i);
-    for j = 1 : i - 1
-        x(i) = x(i) - L(i, j) * x(j);
-    end
-    x(i) = x(i) / L(i, i);
-end
-x = x';  % array -> vector
+A = [
+    3 2 0 0 0 0 0;
+    3 4 -1 2 0 0 0;
+    -1 -1 5 1 0 0 0;
+    2 0 -4 -6 0 0 0;
+    0 0 2 1 8 3 -1;
+    2 1 1 1 1 -4 0;
+    0 1 0 2 0 -1 5;
+];  % unknown matrix
+b = [-1 -21.6 13.7 12.6 58.9 6.8 68.3]';  % known terms
+
+
+%% Solve
+[L, U] = gaussLuDoolittle(A);
+[y] = lowTriangSolve(L, b);  % get y
+[x] = upTriangSolve(U, y);  % compute solution

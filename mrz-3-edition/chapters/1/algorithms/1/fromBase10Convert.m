@@ -1,14 +1,15 @@
-function [x] = upTriangSolver(U, b)
-% UPTRIANGSOLVER: Solves Ux = b where U is a upper triangular matrix
+
+function [c] = fromBase10Convert (a, b)
+% FROMBASE10CONVERT Convert number a from base 10 to number c in base b
 %
-%  [x] = upTriangSolver(U, b)
+%  [c] = fromBase10Convert (a, b)
 %
 % Input:
-% U - upper triangular matrix
-% b - known terms
+% a - integer number to convert from base 10; a should be >= 0
+% b - base to which convert number a; b must >= 2
 %
 % Output:
-% x - solution of Ux = b
+% c - number a converted to base b
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -24,13 +25,12 @@ function [x] = upTriangSolver(U, b)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-n = size(U, 1);  % num of rows (= num of columns)
-x = zeros(1, n);
-for i = n : -1 : 1
-    x(i) = b(i);
-    for j = i + 1 : n
-        x(i) = x(i) - U(i, j) * x(j);
-    end
-    x(i) = x(i) / U(i, i);
+a = abs(a);  % get absolute value
+c = [];
+while a ~= 0
+    q = floor(a / b);  % quotient
+    r = a - q * b;  % remainder
+    a = q;
+    c = [c, r];  % add new digit
 end
-x = x';  % array -> vector
+c = fliplr(c);  % flip

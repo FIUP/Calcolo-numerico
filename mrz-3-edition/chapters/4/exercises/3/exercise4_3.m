@@ -30,16 +30,16 @@ b = [-0.7521 0.6310 0.2501 -0.2345]';  % known terms
 
 
 %% Without pivoting
-[~, U, y] = gaussLuSolver(A, b);
-xW = upTriangSolver(U, y);  % compute solution
+[~, U, y] = gaussLu(A, b);
+xW = upTriangSolve(U, y);  % compute solution
 
 %% Partial pivoting
-[~, ~, U, y] = gaussPivotingWithPermutationSolver(A, b);
-xP = upTriangSolver(U, y);  % compute solution
+[~, ~, U, y] = gaussPivotingPerm(A, b);
+xP = upTriangSolve(U, y);  % compute solution
 
 %% Complete pivoting
-[~, Q, ~, U, y] = gaussTotalPivotingWithPermutationsSolver(A, b);
-xC = upTriangSolver(U, y);  % compute solution
+[~, Q, ~, U, y] = gaussFullPivotingPerm(A, b);
+xC = upTriangSolve(U, y);  % compute solution
 for i = 1 : size(xC, 1)  % swap solution
     toSwap = Q(i);
     if i ~= toSwap
