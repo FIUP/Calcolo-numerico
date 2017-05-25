@@ -1,8 +1,8 @@
-function [L, U] = gaussLuDoolittle(A)
-% GAUSSLUDOOLITTLE: Gauss-Doolitle LU factorization of Ab so that L is
-% lower triangular, U is upper.
+function [L, U] = luTridiagonalThomas(A)
+% LUTRIDIAGONALTHOMAS: Factorization of tridiagonal matrix in lower triangular
+% and upper triangular matrix using Thomas algorithm.
 %
-%  [L, U] = gaussLuDoolittle(A)
+%  [L, U] = luTridiagonalThomas(A)
 %
 % Input:
 % A - matrix n x n
@@ -30,24 +30,8 @@ L = zeros(n, n);
 U = zeros(n, n);
 
 %% Compute U, L
-for j = 1 : n
-    for i = j : n
-        s = 0;  % compute s
-        for k = 1 : j - 1
-            s = s + L(j, k) * U(k, i);
-        end
-        
-        U(j, i) = A(j, i) - s;
-    end
-    
-    L(j, j) = 1;
-    
-    for i = j + 1 : n
-        s = 0;  % compute s
-        for k = 1 : j - 1
-            s = s + L(i, k) * U(k, j);
-        end
-        
-        L(i, j) = (A(i, j) - s) / (U(j, j));
-    end
+U(1, 1) = A(1, 1);
+for i = 2 : n
+    L(i, i -1) = A(i, i - 1) / U(i - 1, i - 1);
+    U(i, i) = A(i, i) * L(i, i - 1) * B(i - 1, i);
 end

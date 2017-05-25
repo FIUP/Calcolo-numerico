@@ -6,8 +6,8 @@ All notable changes to this project will be documented in this file.
 - some functions names
 
 ### Added
-- exercise 4.4, 4.5
-- gauss doolittle method
+- exercise 4.4, 4.5, 4.6
+- gauss doolittle, tridiagonal Thomas methods
 
 ## 0.4.1 - 2017-05-24
 ### Fixed
