@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - some functions names
 
 ### Added
-- exercise 4.4
+- exercise 4.4, 4.5
 - gauss doolittle method
 
 ## 0.4.1 - 2017-05-24

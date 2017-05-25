@@ -2,7 +2,7 @@ function [L, U] = gaussLuCrout(A)
 % GAUSSLUCROUT: Get L, U matrices from A such that LU = A and L, U
 % are triangular.
 %
-%  [L, U] = gaussLuCrout(Ab)
+%  [L, U] = gaussLuCrout(A)
 %
 % Input:
 % A - Matrix n x n
