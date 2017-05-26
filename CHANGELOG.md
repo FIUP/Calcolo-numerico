@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - lower/upper triangular matrix inverter
 - gauss inverter
 - cholesky linear system solver
-- jacobi, Gauss-Seidel methods
+- jacobi, Gauss-Seidel, SOR methods
 - exercise 4.7, 4.8, 4.9, 4.10 with image
 
 ### Fixed
