@@ -5,7 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - lower/upper triangular matrix inverter
 - gauss inverter
-- exercise 4.7
+- cholesky linear system solver
+- exercise 4.7, 4.8
 
 ## 0.4.2 - 2017-05-25
 ### Refactored
