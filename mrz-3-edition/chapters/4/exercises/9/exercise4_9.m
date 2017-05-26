@@ -1,9 +1,9 @@
-function [x] = exercise4_6 ()
-% EXERCISE4_6 Solves exercse 4.6 of book.
+function [x] = exercise4_9 ()
+% EXERCISE4_9 Solves exercse 4.9 of book.
 %
-% exercise4_6 ()
+% exercise4_9 ()
 %
-% Solve tridiagonal linear system with Thomas LU factorization.
+% Factor a matrix with Cholesky method.
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -20,16 +20,13 @@ function [x] = exercise4_6 ()
 % limitations under the License.
 
 A = [
-     5 -1  0  0  0;
-    -3  5 -1  0  0;
-     0 -3  5 -1  0;
-     0  0 -3  5 -1;
-     0  0  0 -3  5;
-];  % matrix
-b = [4 1 1 1 2]';  % known terms
+     9.5 -1.3 0.5 1.2 0.1;
+     -1.3 8.0 0.3 0.1 0.4;
+     0.5 0.3 5.1 0.7 1.2;
+     1.2 0.1 0.7 5.2 2.1;
+     0.1 0.4 1.2 2.1 3.0;
+];  % input matrix
 
-
-%% Solve
-[L, U] = gaussLuCrout(A);
-[y] = lowTriangSolve(L, b);  % get y
-[x] = upTriangSolve(U, y);  % compute solution
+[L] = cholesky(A);  % find cholesky factorization
+disp('Cholesky error')
+abs(L * L' - A)
