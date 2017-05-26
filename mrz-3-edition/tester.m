@@ -117,7 +117,8 @@ choleskySolve([
     6 8 10 9;
     5 7 9 10;
 ], [23 32 33 31]');  % exercise 4.8
-exercise4_9();  % 1.0e-14 * ...
+% exercise4_9();  % 1.0e-14 * ...
+% exercise4_10();  % see image
 
 %% chapter 5
 % algorithms

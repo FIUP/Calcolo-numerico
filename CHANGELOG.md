@@ -7,7 +7,10 @@ All notable changes to this project will be documented in this file.
 - gauss inverter
 - cholesky linear system solver
 - jacobi, Gauss-Seidel methods
-- exercise 4.7, 4.8, 4.9
+- exercise 4.7, 4.8, 4.9, 4.10 with image
+
+### Fixed
+- && operator in Jacobi function
 
 ## 0.4.2 - 2017-05-25
 ### Refactored

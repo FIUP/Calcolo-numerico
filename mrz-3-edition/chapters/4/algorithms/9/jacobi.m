@@ -34,9 +34,9 @@ k = 0;
 x = x0;
 testToll = toll + 1;
 xHelper = zeros(n, 1);
-while testToll > toll && k < kmax
+while testToll > toll & k < kmax
     k = k + 1;
-    for i = 0 : n
+    for i = 1 : n
         xHelper(i) = 0;
         for j = 1 : i - 1
             xHelper(i) = xHelper(i) + A(i, j) * x(j);

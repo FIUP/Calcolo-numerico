@@ -1,4 +1,4 @@
-function [L, U, y] = gaussLu(A, b = zeros(1, n))
+function [L, U, y] = gaussLu(A, b)
 % GAUSSLU: Solves Ax = b where A is a nonsingular matrix with Gauss
 % method.
 %

@@ -1,4 +1,4 @@
-function [x] = exercise4_9 ()
+function exercise4_9 ()
 % EXERCISE4_9 Solves exercse 4.9 of book.
 %
 % exercise4_9 ()
