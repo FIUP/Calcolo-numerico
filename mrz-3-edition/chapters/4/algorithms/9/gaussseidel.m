@@ -1,5 +1,5 @@
 function [x, k] = gaussseidel(A, b, x0, toll, kmax)
-% JACOBI: Solve Ax = b with Gauss-Seidel method
+% GAUSSSEIDEL: Solve Ax = b with Gauss-Seidel method
 %
 %  [x, k] = gaussseidel(A, b, x0, toll, kmax)
 %

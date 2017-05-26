@@ -1,5 +1,5 @@
 function [x, k] = sor(A, b, x0, toll, kmax, o)
-% JACOBI: Solve Ax = b with SOR method
+% SOR: Solve Ax = b with SOR method
 %
 %  [x, k] = sor(A, b, x0, toll, kmax, o)
 %

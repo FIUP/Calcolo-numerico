@@ -1,7 +1,7 @@
-function [x, k] = sor(A, b, x0, toll, kmax, o)
-% JACOBI: Solve Ax = b with SOR method
+function [x, r, k] = gradPc(A, b, x0, toll, kmax)
+% GRADPC: Solve Ax = b with preconditioned gradient method
 %
-%  [x, k] = sor(A, b, x0, toll, kmax, o)
+%  [x, k] = gradPc(A, b, x0, toll, kmax)
 %
 % Input:
 % A - Matrix n x n
@@ -9,10 +9,10 @@ function [x, k] = sor(A, b, x0, toll, kmax, o)
 % x0 - starting vector
 % toll - max error tolerance
 % kmax - max number of iterations
-% o - float in ]0, 2[
 %
 % Output:
 % x - solution of Ax = b
+% r - residue vector
 % k - number of iterations done
 
 % Copyright 2017 Stefano Fogarollo
@@ -34,26 +34,18 @@ n = size(A, 1);
 k = 0;
 x = x0;
 r = b - A * x;
-testToll = norm(r);
-toll = toll * norm(b);
-xHelper = zeros(n, 1);
-while testToll > toll && k < kmax
+z = r;
+pOld = r' * r;
+testToll = (toll * toll) * (b' * b);
+
+while pOld > testToll && k < kmax
     k = k + 1;
-    for i = 1 : n
-        xHelper(i) = 0;
-        for j = 1 : i - 1
-            xHelper(i) = xHelper(i) + A(i, j) * xHelper(j);
-        end
-        
-        for j = i + 1 : n
-            xHelper(i) = xHelper(i) + A(i, j) * x(j);
-        end
-        
-        xHelper(i) = (b(i) - xHelper(i)) / A(i, i);
-        xHelper(i) = x(i) + o * (xHelper(i) - x(i));
-    end
-    
-    x = xHelper;
-    r = b - A * x;
-    testToll = norm(r);
+    v = A * z;
+    g = pOld / z' * v;
+    x = x + g * z;
+    r = r - g * v;
+    pNew = r' * r;
+    a = pNew / pOld;
+    z = r + a * z;
+    pOld = pNew;
 end

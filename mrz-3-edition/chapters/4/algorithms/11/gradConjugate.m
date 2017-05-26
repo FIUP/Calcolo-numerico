@@ -1,7 +1,7 @@
 function [x, r, k] = gradConjugate(A, b, x0, toll, kmax)
-% JACOBI: Solve Ax = b with SOR method
+% GRADCONJUGATE: Solve Ax = b with conjugate gradient method
 %
-%  [x, k] = sor(A, b, x0, toll, kmax)
+%  [x, k] = gradConjugate(A, b, x0, toll, kmax)
 %
 % Input:
 % A - Matrix n x n
