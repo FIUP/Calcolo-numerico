@@ -41,7 +41,7 @@ testToll = (toll * toll) * (b' * b);
 while pOld > testToll && k < kmax
     k = k + 1;
     v = A * z;
-    g = pOld / z' * v;
+    g = pOld / (z' * v);
     x = x + g * z;
     r = r - g * v;
     pNew = r' * r;

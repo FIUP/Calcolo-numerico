@@ -121,6 +121,13 @@ choleskySolve([
 % exercise4_10();  % see image
 % exercise4_11();  % see image
 % exercise4_12();  % see image
+[x, r, k] = gradConjugate([
+    60 -31 26 33 -28;
+    -31 79 -42 36 -15;
+    26 -42 59 -31 20;
+    33 36 -31 79 -52;
+    -28 -15 20 -52 87;
+], [60 27 32 65 12]', zeros(5, 1), 1e-10, 20);  % exercise 4.13, [1 1 1 1 1]'
 
 %% chapter 5
 % algorithms
