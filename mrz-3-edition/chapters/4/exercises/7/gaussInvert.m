@@ -1,15 +1,13 @@
-function [UL] = gaussLuEye(A, b)
-% GAUSSLU: Solves Ax = b where A is a nonsingular matrix with Gauss
-% method.
+function [X] = gaussInvert(A)
+% GAUSSINVERT: Finds A^-1 with Gauss method
 %
-%  [UL] = gaussLuEye(A, b)
+%  [X] = gaussInvert(A)
 %
 % Input:
 % A - matrix n x n
-% b - vector known terms
 %
 % Output:
-% UL - matrix  U | L^-1, with U, L the LU factorization of A
+% X - matrix n x n such that MA = I (M is the inverse of A)
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -27,11 +25,8 @@ function [UL] = gaussLuEye(A, b)
 
 
 n = size(A, 1);  % number of columns of A
-I = eye(n);
-AI = A;
-AI(:, n + 1 : n + 3) = I;  % add eye matrix
 L = ones(n, n);
-U = AI;  % copy matrix
+U = A;  % copy matrix
 
 %% Initialize L
 for i = 1 : n
@@ -40,14 +35,19 @@ for i = 1 : n
     end
 end
 
-%% Initialize U with Gauss algorithm
-for k = 1 : n - 1
+%% Compute L, U with Gauss algorithm
+for k = 1 : n -1
     for i = k + 1 : n
         L(i, k) = U(i, k) / U(k, k);
-        for j = k : n + 1
+        for j = k : n
             U(i, j) = U(i, j) - L(i, k) * U(k, j);
         end
     end
 end
 
-U(:, n + 1) = [];
+[M] = lowTriInv(L);  % find inverse of L
+X = zeros(n, n);  % initialize output matrix
+for i = 1 : n
+    l = M(:, i);  % i-th column if inverse of L
+    X(:, i) = upTriangSolve(U, l);
+end
