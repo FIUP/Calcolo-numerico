@@ -1,10 +1,11 @@
-function [x, r, k] = gradPc(A, b, x0, toll, kmax)
+function [x, r, k] = gradPc(A, M, b, x0, toll, kmax)
 % GRADPC: Solve Ax = b with preconditioned gradient method
 %
 %  [x, k] = gradPc(A, b, x0, toll, kmax)
 %
 % Input:
-% A - Matrix n x n
+% A - n x n matrix
+% M - approximation of A such that Mz = r is easy to solve
 % b - vector of known terms
 % x0 - starting vector
 % toll - max error tolerance
@@ -34,7 +35,7 @@ n = size(A, 1);
 k = 0;
 x = x0;
 r = b - A * x;
-z = r;
+% solve Mz = r
 pOld = r' * r;
 testToll = (toll * toll) * (b' * b);
 
@@ -44,7 +45,8 @@ while pOld > testToll && k < kmax
     g = pOld / z' * v;
     x = x + g * z;
     r = r - g * v;
-    pNew = r' * r;
+    % solve Mz = r
+    pNew = r' * z;
     a = pNew / pOld;
     z = r + a * z;
     pOld = pNew;
