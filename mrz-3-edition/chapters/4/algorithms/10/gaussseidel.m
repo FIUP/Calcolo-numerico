@@ -1,14 +1,18 @@
-function [L] = cholesky(A)
-% CHOLESKY: Get L matrix from A such that L*L' = A using
-% Cholesky method
+function [x, k] = gaussseidel(A, b, x0, toll, kmax)
+% JACOBI: Solve Ax = b with Gauss-Seidel method
 %
-%  [L] = choleskyFactorization(A)
+%  [x, k] = gaussseidel(A, b, x0, toll, kmax)
 %
 % Input:
 % A - Matrix n x n
+% b - vector of known terms
+% x0 - starting vector
+% toll - max error tolerance
+% kmax - max number of iterations
 %
 % Output:
-% L - L matrix such that L*L' = A
+% x - solution of Ax = b
+% k - number of iterations done
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -26,29 +30,26 @@ function [L] = cholesky(A)
 
 
 n = size(A, 1);
-if A(1, 1) <= 0
-    error('Cannot perform Cholesky factorization: A(1, 1) <= 0');
-else
-    L(1, 1) = sqrt(A(1, 1));
-    for i = 2 : n
-        L(i, 1) = A(i, 1) / L(1, 1);
-    end
-    for j = 2 : n
-        L(j, j) = A(j, j);
-        for k = 1 : j - 1
-            L(j, j) = L(j, j) - L(j, k) ^ 2;
+k = 0;
+x = x0;
+r = b - A * x;
+testToll = norm(r);
+toll = toll * norm(b);
+while testToll > toll && k < kmax
+    k = k + 1;
+    for i = 1 : n
+        x(i) = 0;
+        for j = 1 : i - 1
+            x(i) = x(i) + A(i, j) * x(j);
         end
-        if L(j, j) <= 0
-            error('Cannot perform Cholesky factorization: L(j, j) <= 0');
-        else
-            L(j, j) = sqrt(L(j, j));
-            for i = j + 1 : n
-                L(i, j) = A(i, j);
-                for k = 1 : j - 1
-                    L(i, j) = L(i, j) - L(i, k) * L(j, k);
-                end
-                L(i, j) = L(i, j) / L(j, j);
-            end
+        
+        for j = i + 1 : n
+            x(i) = x(i) + A(i, j) * x(j);
         end
+        
+        x(i) = (b(i) - x(i)) / A(i, i);
     end
+    
+    r = b - A * x;
+    testToll = norm(r);
 end
