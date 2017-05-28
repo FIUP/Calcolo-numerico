@@ -1,5 +1,5 @@
 function exercise7_1 ()
-% EXERCISE6_1 Solves exercise 7.1 of book. Compare trapezoidal rule and
+% EXERCISE7_1 Solves exercise 7.1 of book. Compare trapezoidal rule and
 % Simpson method to calculate value of integral.
 %
 % exercise7_1 ()
