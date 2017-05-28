@@ -38,7 +38,8 @@ for i = 1 : n  % fill first column
     m = 2 * m;
 end
 for k = 1 : n - 1
-    for i = 0 : n - k - 1
+    for i = 1 : n - k - 1
         T(i, k + 1) = (4 ^ (k + 1) * T(i + 1, k) - T(i, k)) / (4 ^ (k + 1) - 1);
     end
 end
+I = T(n, 1);

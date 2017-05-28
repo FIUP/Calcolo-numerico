@@ -143,8 +143,6 @@ choleskySolve([
 
 % exercises
 % exercise6_1();  % exercise 6.1
-% exercise6_2();  % TODO % exercise 6.2
-% exercise6_3();  % TODO % exercise 6.3
 exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.414213562373095 0.349241122458488 -0.041104472283004 0.009243006108162 -0.002486810899427], [1.414213562373095 0.349241122458488 -0.041104472283004 0.009243006108147 -0.002486810899327]
 % exercise6_5();  % exercise 6.5
 % exercise6_6();  % exercise 6.6
@@ -155,7 +153,13 @@ exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.4142135623730
 
 %% chapter 7
 % algorithms
+trapezoidalRule(@(x) x^2, 0, 4, 100);  % 21.33
+simpson(@(x) x^3, 0, 4, 100);  % 64
+romberg(@(x) x^4, 0, 4, 100, 50);  % 204.8
+
 % exercises
+% exercise7_1();  % see image
+% exercise7_1();  % see image
 
 %% chapter 8
 % algorithms
