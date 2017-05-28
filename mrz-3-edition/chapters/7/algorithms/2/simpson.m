@@ -1,22 +1,21 @@
-function [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
+function [I] = simpson(f, a, b, m)
+% SIMPSON: Finds the value of integral(f) from a to b using the
+% Simpson rule with m intervals.
+%
+%  [I] = simpson(f, a, b, m)
+%
+% Input:
+% f - function to integrate
+% a - start point
+% b - end point
+% m - number of intervals to create
+%
+% Output:
+% I - approximation of solution of 'f(x) = x'
+% numberOfIterations - number of integral(f) from a to b
 % NEWTON: Finds a solution of f(x) = 0 with Newton method.
 %
 %  [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
-%
-% Input:
-% f - 'f' function in the equation 'f(x) = 0'
-% fDerivative - derivative of f
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
-%
-% Output:
-% x - approximation of solution of 'f(x) = 0'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
-% derivativeZero - boolean to check whether function has stopped or not
-%                  because of a f'(x) = 0
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -26,24 +25,24 @@ function [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startP
 %
 % http://www.apache.org/licenses/LICENSE-2.0
 %
-% Unless required by applicable law or agreed to in writing, software
+% Unless require4d by applicable law or agreed to in writing, software
 % distributed under the License is distributed on an "AS IS" BASIS,
 % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-derivativeZero = false;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue == 0
-        derivativeZero = true;
-    else
-        deltaDiff = - feval(f, x) / derivativeValue;
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
+if mod(m, 2) ~= 0  % m is odd
+    error('Cannot integrate using Simpson rule because #intervals is odd');
+else
+    h = (b - a) / m;  % step
+    I = feval(f, a) + feval(f, b);  % starting value
+    for i = 1 : 2 : m - 1  % step 2
+        x = a + i * h;
+        I = I + 4 * feval(f, x);
     end
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
+    for i = 2 : 2 : m - 2  % step 2
+        x = a + i * h;
+        I = I + 2 * feval(f, x);
+    end
+    I = h * I / 3;
 end

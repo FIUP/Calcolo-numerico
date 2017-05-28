@@ -1,5 +1,5 @@
 function [I] = trapezoidalRule(f, a, b, m)
-% TRAPEZOIDALRULE: Finds teh value of integral(f) from a to b using the
+% TRAPEZOIDALRULE: Finds the value of integral(f) from a to b using the
 % Trapezoidal rule with m intervals.
 %
 %  [I] = trapezoidalRule(f, a, b, m)
