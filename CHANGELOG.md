@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.4.4 - 2017-05-28
 ### Added
 - trapezoidal rule, simpson, romberg integration methods
+- exercise 7.1 with image
 
 ## 0.4.3 - 2017-05-26
 ### Added
