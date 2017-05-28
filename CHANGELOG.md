@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4.4 - 2017-05-28
+### Added
+- trapezoidal rule integration method
+
 ## 0.4.3 - 2017-05-26
 ### Added
 - lower/upper triangular matrix inverter

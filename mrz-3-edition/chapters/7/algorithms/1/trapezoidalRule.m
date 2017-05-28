@@ -1,20 +1,18 @@
-function [x, numberOfIterations] = fixedPoint(f, startPoint, tolerance, maxIterations)
-% FIXEDPOINT: Finds a solution of x = f(x) with the classic fixed-point
-% method.
+function [I] = trapezoidalRule(f, a, b, m)
+% TRAPEZOIDALRULE: Finds teh value of integral(f) from a to b using the
+% Trapezoidal rule with m intervals.
 %
-%  [x] = fixedPoint(f, startPoint, tolerance, maxIterations)
+%  [I] = trapezoidalRule(f, a, b, m)
 %
 % Input:
-% f - 'f' function in the equation 'x = f(x)'
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - xn| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
+% f - function to integrate
+% a - start point
+% b - end point
+% m - number of intervals to create
 %
 % Output:
-% x - approximation of solution of 'f(x) = x'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
+% I - approximation of solution of 'f(x) = x'
+% numberOfIterations - number of integral(f) from a to b
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -30,12 +28,11 @@ function [x, numberOfIterations] = fixedPoint(f, startPoint, tolerance, maxItera
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
-    xOld = x;
-    x = feval(f, x);  % evaluate function in x
-    deltaDiff = abs(x - xOld);  % update diff
+
+h = (b - a) / m;  % step
+I = feval(f, a) + feval(f, b);  % starting value
+for i = 1 : m - 1
+    x = a + i * h;
+    I = I + 2 * feval(f, x);
 end
+I = h * I / 2;
