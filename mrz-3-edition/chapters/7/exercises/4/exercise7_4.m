@@ -1,8 +1,8 @@
-function exercise7_3 ()
-% EXERCISE7_3 Solves exercise 7.3 of book. Compare trapezoidal rule and
-% Romberg method to solve integral.
+function exercise7_4 ()
+% EXERCISE7_4 Solves exercise 7.4 of book. Calculates integral with
+% trapezoidal rule.
 %
-% exercise7_3 ()
+% exercise7_4 ()
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -18,15 +18,16 @@ function exercise7_3 ()
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-f = @(x) 1 / x;  % function to integrate
-intervalStart = 1;  % interval
-intervalEnd = 3;
-exactValue = log(3) - log(1);  % exact value of integral
-xVals = linspace(0, 4, 5);  % x values
+f = @(x) x * exp(x);  % function to integrate
+intervalStart = 0;  % interval
+intervalEnd = 2;
+exactValue = exp(2) + 1;  % exact value of integral
+testTollStop = 1;  % stop calculating approximation when this < 1e-8
+m = 2;
 
 %% Calculate results
-for i = 1 : length(xVals)
-    m = 2 ^ i;  % number of points with which to calculate approximation
+while testTollStop > 1e-8
+    m = 2 * m;  % number of points with which to calculate approximation
     
     %% Trapezoidal rule
     approxI = trapezoidalRule(f, intervalStart, intervalEnd, m);  % calculate
@@ -34,9 +35,6 @@ for i = 1 : length(xVals)
     errAbs = abs(approxI - exactValue)  % calculate errors
     errRel = errAbs / abs(exactValue)
     
-    %% Romberg method
-    approxI = romberg(f, intervalStart, intervalEnd, m, 5);  % calculate
-    disp(['Romberg method with m = ' num2str(m)]);
-    errAbs = abs(approxI - exactValue)  % calculate errors
-    errRel = errAbs / abs(exactValue)
+    %% Update stop test
+    testTollStop = errAbs;
 end
