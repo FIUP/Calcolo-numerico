@@ -51,7 +51,7 @@ while testToll > toll && nr < nmax
             if A(i, j) > maxV  % found such p, q
                 p = i;
                 q = j;
-                maxV = A(i, j;
+                maxV = A(i, j);
             end
         end
     end
