@@ -162,6 +162,7 @@ romberg(@(x) x^4, 0, 4, 100, 5);  % 204.8
 % exercise7_2();  % see image
 % exercise7_3(); % exercise 7.3
 % exercise7_4(); % exercise 7.4
+% exercise7_5(); % exercise 7.5
 
 %% chapter 8
 % algorithms
