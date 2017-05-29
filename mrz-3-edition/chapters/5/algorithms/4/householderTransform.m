@@ -1,22 +1,15 @@
-function [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
-% NEWTON: Finds a solution of f(x) = 0 with Newton method.
+function [H, Q] = householderTransform(A)
+% GIVENSTRANSFORM: Turn A into upper Hessenberg matrix using Householder
+% method.
 %
-%  [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startPoint, tolerance, maxIterations)
+%  [H] = givensTransform(A)
 %
 % Input:
-% f - 'f' function in the equation 'f(x) = 0'
-% fDerivative - derivative of f
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
+% A - matrix
 %
 % Output:
-% x - approximation of solution of 'f(x) = 0'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
-% derivativeZero - boolean to check whether function has stopped or not
-%                  because of a f'(x) = 0
+% H - upper Hessenberg matrix
+% Q - ortogonal matrix such that A = Q * H * Q'
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -32,18 +25,28 @@ function [x, numberOfIterations, derivativeZero] = newton(f, fDerivative, startP
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-derivativeZero = false;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations && ~derivativeZero
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue == 0
-        derivativeZero = true;
-    else
-        deltaDiff = - feval(f, x) / derivativeValue;
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
+n = size(A, 1);  % number of rows
+Q = eye(n);
+w = zeros(n, 1);
+
+for k = 1 : n - 2
+    tmp = 0;
+    
+    for i = k + 1 : n
+        tmp = tmp + A(i, k) ^ 2;
     end
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
+    tmp = -sign(A(k + 1, k)) * sqrt(tmp);
+    v = tmp * (tmp - A(k + 1, k));
+    w(k + 1) = A(k + 1, k) - tmp;
+    for i = 1 : k
+        w(i) = 0;
+    end
+    for i = k + 2 : n
+        w(i) = A(i, k);
+    end
+    
+    Qk = eye(n) - ((w * w') / v);
+    A = Qk * A * Qk;
+    Q = Q * Qk;
 end
+H = A;
