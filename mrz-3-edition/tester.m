@@ -78,18 +78,18 @@ lowTriangSolve([
     1 0;
     3 4
 ], [3 5]');  % [3 -1]'
-[~, U, y] = gaussLu([
+gaussLu([
     1 7 8;
     1 3 1
     5 4 3
 ], [9 8 2]');
 upTriangSolve(U, y);  % [-1.4348 3.8261 -2.0435]'
-[~, U, y] = gaussPivoting([
+gaussPivoting([
     1 1 1;
     0 2 5;
     2 5 -1
 ], [6 -4 27]');
-x = upTriangSolve(U, y);  % [5 3 -2]'
+upTriangSolve(U, y);  % [5 3 -2]'
 gaussLuCrout([4 2 1; 9 8 7; 2 2 9]);  % [4 0 0; 9 3.5 0; 2 1 7.1429], [1 0.5 0.25; 0 1 1.3571; 0 0 1]
 cholesky([74 31 100; 31 54 89; 100 89 226]);  % [8.6023 0 0; 3.6037 6.4042 0; 11.6248 7.3558 6.0627]
 
@@ -121,7 +121,7 @@ choleskySolve([
 % exercise4_10();  % see image
 % exercise4_11();  % see image
 % exercise4_12();  % see image
-[x, r, k] = gradConjugate([
+gradConjugate([
     60 -31 26 33 -28;
     -31 79 -42 36 -15;
     26 -42 59 -31 20;
@@ -131,16 +131,31 @@ choleskySolve([
 
 %% chapter 5
 % algorithms
-[~, ~, ~] = jacobiEigen([
+jacobiEigen([
     14 32 50;
     32 77 122;
     50 122 194
 ], 1e-8, 10);  % same as eig(...)
-[A, V, k, nr] = jacobiEigenCycle([
+jacobiEigenCycle([
     14 32 50;
     32 77 122;
     50 122 194
 ], 1e-8, 10);  % same as eig(...)
+givensTransform([
+    14 32 50;
+    32 77 122;
+    50 122 194
+]);  % same as hess(...)
+householderTransform([
+    14 32 50;
+    32 77 122;
+    50 122 194
+]);  % same as hess(...)
+qrNoShift([
+    0.6026 -0.6896 0;
+    -0.6896 90.3974 -131.8484;
+    0 -131.8484 194.0000
+], 1e-8, 10)  % same as eig(...)
 
 % exercises
 
