@@ -158,6 +158,7 @@ qrNoShift([
 ], 1e-8, 10)  % same as eig(...)
 
 % exercises
+exercise5_4 ();  % [1 2 3 4]
 
 %% chapter 6
 % algorithms
