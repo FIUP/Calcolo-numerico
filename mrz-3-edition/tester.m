@@ -155,11 +155,12 @@ exercise6_4(linspace(2, 2.4, 5), sqrt(linspace(2, 2.4, 5)));  % [1.4142135623730
 % algorithms
 trapezoidalRule(@(x) x^2, 0, 4, 100);  % 21.33
 simpson(@(x) x^3, 0, 4, 100);  % 64
-romberg(@(x) x^4, 0, 4, 100, 50);  % 204.8
+romberg(@(x) x^4, 0, 4, 100, 5);  % 204.8
 
 % exercises
 % exercise7_1();  % see image
-% exercise7_1();  % see image
+% exercise7_2();  % see image
+% exercise7_3(); % exercise 76.10.3
 
 %% chapter 8
 % algorithms
