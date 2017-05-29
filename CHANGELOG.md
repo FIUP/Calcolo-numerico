@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - exercise 7.3, 7.4, 7.5
 - classical and cyclic jacobi eigenv* finder
+- hessenberg tranformer with givens rotations
 
 ## 0.4.4 - 2017-05-28
 ### Added

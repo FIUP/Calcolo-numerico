@@ -131,6 +131,17 @@ choleskySolve([
 
 %% chapter 5
 % algorithms
+[~, ~, ~] = jacobiEigen([
+    14 32 50;
+    32 77 122;
+    50 122 194
+], 1e-8, 10);  % same as eig(...)
+[A, V, k, nr] = jacobiEigenCycle([
+    14 32 50;
+    32 77 122;
+    50 122 194
+], 1e-8, 10);  % same as eig(...)
+
 % exercises
 
 %% chapter 6

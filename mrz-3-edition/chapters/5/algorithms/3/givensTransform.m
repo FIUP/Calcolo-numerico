@@ -1,21 +1,14 @@
-function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
-% MULTIPLEROOTSNEWTON: Finds a solution of f(x) = 0 with Newton method.
+function [H] = givensTransform(A)
+% GIVENSTRANSFORM: Turn A into upper Hessenberg matrix using Givens
+% rotation matrix.
 %
-%  [x, numberOfIterations, derivativeZero] = multipleRootsNewton(f, fDerivative, startPoint, tolerance, maxIterations, r)
+%  [H] = givensTransform(A)
 %
 % Input:
-% f - 'f' function in the equation 'f(x) = 0'
-% fDerivative - derivative of f
-% startPoint - starting point of method
-% tolerance - epsilon at which stop method (i.e when |f(xn) - 0| <
-%             epsilon)
-% maxIterations - max number of iterations to execute
-% r - multiplicity of the solution
+% A - matrix
 %
 % Output:
-% x - approximation of solution of 'f(x) = 0'
-% numberOfIterations - number of iterations executed before getting
-%                      solution
+% H - upper Hessenberg matrix
 
 % Copyright 2017 Stefano Fogarollo
 %
@@ -31,15 +24,27 @@ function [x, numberOfIterations] = multipleRootsNewton(f, fDerivative, startPoin
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
-numberOfIterations = 0;
-x = startPoint;
-deltaDiff = tolerance * 2;  % initialize diff
-while deltaDiff >= tolerance && numberOfIterations < maxIterations
-    derivativeValue = feval(fDerivative, x);
-    if derivativeValue ~= 0
-        deltaDiff = - r * feval(f, x) / feval(fDerivative, x);
-        x = x + deltaDiff;
-        deltaDiff = abs(deltaDiff);
+n = size(A, 1);  % number of rows
+
+for k = 1 : n - 2
+    for i = k + 2 : n
+        alpha = sqrt(A(k + 1, k) ^ 2 + A(i, k) ^ 2);
+        c = A(k + 1, k) / alpha;
+        s = A(i, k) / alpha;
+        A(k + 1, k) = alpha;
+        A(i, k) = 0;
+        
+        for j = k + 1 : n
+            tmp = A(k + 1, j) * c + A(i, j) * s;
+            A(i, j) = - A(k + 1, j) * s + A(i, j) * c;
+            A(k + 1, j) = tmp;
+        end
+        
+        for j = 1 : n
+            tmp = A(j, k + 1) * c + A(j, i) * s;
+            A(j, i) = - A(j, k + 1) * s + A(j, i) * c;
+            A(j, k + 1) = tmp;
+        end
     end
-    numberOfIterations  = numberOfIterations + 1;  % increase counter
 end
+H = A;
