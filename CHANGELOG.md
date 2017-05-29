@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.4.5 - 2017-05-29
 ### Added
 - exercise 7.3, 7.4, 7.5
-- classical jacobi eigenv* finder
+- classical and cyclic jacobi eigenv* finder
 
 ## 0.4.4 - 2017-05-28
 ### Added
