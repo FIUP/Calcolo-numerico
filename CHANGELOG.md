@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4.6- 2017-06-02
+### Added
+- lab tests
+
 ## 0.4.5 - 2017-05-29
 ### Added
 - exercise 7.3, 7.4, 7.5
