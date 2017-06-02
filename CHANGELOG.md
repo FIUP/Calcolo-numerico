@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 0.4.6- 2017-06-02
 ### Added
 - lab tests
+- lab 0 exercises
 
 ## 0.4.5 - 2017-05-29
 ### Added
